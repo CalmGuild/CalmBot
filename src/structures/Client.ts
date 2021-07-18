@@ -5,6 +5,8 @@ import fs from "fs";
 import path from "path";
 import { ICommand, ICommandSettings, SubCommandSettings } from "./interfaces";
 import Utils from "../util/Utils";
+import { IGuildSettings } from "../schemas/GuildSettings";
+import PermissionHandler from "../util/PermissionHandler";
 
 export default class Client extends DiscordClient {
   commands = new Collection<string, ICommand>();
@@ -31,6 +33,7 @@ export default class Client extends DiscordClient {
           if (!files.includes(commandName) && commandName !== "subcommandsettings")
             commands.set(commandName, {
               run: command.run,
+              name: commandName,
               aliases: command.aliases,
               defaultSubCommand: command.defaultSubCommand,
               description: command.description,
@@ -56,6 +59,7 @@ export default class Client extends DiscordClient {
           }
 
           const command: ICommand = {
+            name: file,
             usage: "N/A",
             description: "N/A",
             aliases: settings.aliases,
@@ -74,7 +78,7 @@ export default class Client extends DiscordClient {
     }
   }
 
-  handleCommand(command: ICommand, message: Message, args: string[]) {
+  handleCommand(command: ICommand, message: Message, args: string[], settings?: IGuildSettings | null) {
     let subcommandName: string | undefined;
     if (command.type === "SUB_COMMAND") {
       const newArgs = args.slice(0); // prevent args from being shifted
@@ -88,6 +92,16 @@ export default class Client extends DiscordClient {
     }
 
     if (message.guild) {
+      if (settings!!.sleep && !PermissionHandler.isAdmin(message.member!!)) {
+        this.reply(message, "This bot is on sleep mode!");
+        return;
+      }
+
+      if (settings!!.disabledCommands.includes(command.name) && !PermissionHandler.isAdmin(message.member!!)) {
+        this.reply(message, "This command is disabled!");
+        return;
+      }
+
       if (command.permissions && !Utils.hasPermissions(message.member!!, command.permissions)) {
         this.reply(message, {
           content: `You are missing the following permission(s) to run this command\n${command.permissions
@@ -113,12 +127,12 @@ export default class Client extends DiscordClient {
       }
 
       if (subcommand) {
-        this.handleCommand(subcommand, message, args);
+        this.handleCommand(subcommand, message, args, settings);
       } else {
         this.reply(message, { content: `Invalid arugments!` });
       }
     } else {
-      command.run(this, message, args);
+      command.run(this, message, args, settings);
     }
   }
 
