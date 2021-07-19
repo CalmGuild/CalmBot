@@ -1,4 +1,4 @@
-import { ICommandSettings } from "../structures/interfaces";
+import { ICommandSettings } from "../../structures/interfaces";
 
 // TODO - Have categories for each command and make it so you can't disable admin/moderation commands instead of this
 const cantBeDisabled = ["togglecommand", "sleep"]

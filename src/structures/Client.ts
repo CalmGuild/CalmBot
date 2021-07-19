@@ -19,9 +19,14 @@ export default class Client extends DiscordClient {
   }
 
   registerCommands(commandsDir: string) {
-    this.commands = walk(commandsDir);
+    let cmds = new Collection<string, ICommand>();
+    fs.readdirSync(commandsDir).forEach((file) => {
+      const category = file.toLowerCase();
+      cmds = new Collection([...cmds, ...walk(path.join(commandsDir, category), category)]);
+    });
+    this.commands = cmds;
 
-    function walk(dir: string): Collection<string, ICommand> {
+    function walk(dir: string, category: string): Collection<string, ICommand> {
       const commands = new Collection<string, ICommand>();
       const files = fs.readdirSync(dir);
       files.forEach((file) => {
@@ -42,9 +47,10 @@ export default class Client extends DiscordClient {
               permissions: command.permissions,
               minArgs: command.minArgs,
               type: "COMMAND",
+              category: category,
             });
         } else {
-          const subcommands = walk(path.join(dir, file));
+          const subcommands = walk(path.join(dir, file), category);
 
           let defaultSubCommand = undefined;
           if (files.includes(file + ".js") || files.includes(file + ".ts")) {
@@ -66,6 +72,7 @@ export default class Client extends DiscordClient {
             defaultSubCommand: settings.defaultSubCommand ? settings.defaultSubCommand : defaultSubCommand,
             guildOnly: settings.guildOnly,
             subcommands: subcommands,
+            category: category,
             type: "SUB_COMMAND",
             run: (client, message, args) => {
               client.handleCommand(command, message, args);

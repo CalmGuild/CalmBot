@@ -19,7 +19,8 @@ export interface ICommand {
   minArgs?: number;
   permissions?: Permission[];
   type: CommandType;
+  category: string;
 }
 
-export type SubCommandSettings = Omit<ICommand, "run" | "description" | "usage" | "subcommands" | "type" | "name">;
-export type ICommandSettings = Omit<ICommand, "subcommands" | "type" | "name">;
+export type SubCommandSettings = Omit<ICommand, "run" | "description" | "usage" | "subcommands" | "type" | "name" | "category">;
+export type ICommandSettings = Omit<ICommand, "subcommands" | "type" | "name" | "category">;

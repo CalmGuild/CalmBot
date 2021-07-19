@@ -1,4 +1,4 @@
-import { ICommandSettings } from "../structures/interfaces";
+import { ICommandSettings } from "../../structures/interfaces";
 
 const command: ICommandSettings = {
   run: (client, message, args, settings) => {
