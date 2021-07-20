@@ -21,7 +21,7 @@ const command: ICommandSettings = {
       client.reply(message, { embeds: [embed] });
       return;
     } else {
-      const command = client.commands.get(args[0]) ?? client.commands.find((cmd) => (cmd.aliases ? cmd.aliases.includes(args[0]!!) : false));
+      const command = client.commands.get(args[0].toLowerCase()) ?? client.commands.find((cmd) => (cmd.aliases ? cmd.aliases.includes(args[0]!!.toLowerCase()) : false));
       if (!command) {
         client.reply(message, "Invalid command.");
         return;
