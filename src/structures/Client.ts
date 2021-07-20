@@ -11,7 +11,7 @@ import PermissionHandler from "../util/PermissionHandler";
 export default class Client extends DiscordClient {
   commands = new Collection<string, ICommand>();
   logger = logger;
-  prefix = "!";
+  prefix = "c!";
   static developers = ["438057670042320896" /* Miqhtie */]; // IDs of calmbot developers
 
   constructor(options: ClientOptions) {
@@ -23,7 +23,6 @@ export default class Client extends DiscordClient {
     fs.readdirSync(commandsDir).forEach((file) => {
       const category = file.toLowerCase();
       cmds = new Collection([...cmds, ...walk(path.join(commandsDir, category), category)]);
-
     });
     this.commands = cmds;
 
