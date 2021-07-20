@@ -146,7 +146,7 @@ export default class Client extends DiscordClient {
   registerEvents(eventsDir: string) {
     const files = fs.readdirSync(eventsDir).filter((file) => !fs.statSync(path.join(eventsDir, file)).isDirectory());
     files.forEach((file) => {
-      const eventName = file.split(".")[0]!!.toLowerCase();
+      const eventName = file.split(".")[0]!!;
 
       const event: () => void = require(path.join(eventsDir, file)).default;
 
