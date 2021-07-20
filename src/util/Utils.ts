@@ -48,4 +48,8 @@ export default class Utils {
     if (matches.length === 0) return undefined;
     return matches;
   }
+
+  static randomArray<T>(array: T[]): T | undefined {
+    return array[Math.floor(Math.random() * array.length + 0)]
+  }
 }
