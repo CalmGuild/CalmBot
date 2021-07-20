@@ -23,6 +23,7 @@ export default class Client extends DiscordClient {
     fs.readdirSync(commandsDir).forEach((file) => {
       const category = file.toLowerCase();
       cmds = new Collection([...cmds, ...walk(path.join(commandsDir, category), category)]);
+
     });
     this.commands = cmds;
 
