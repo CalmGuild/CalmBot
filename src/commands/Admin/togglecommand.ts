@@ -1,13 +1,18 @@
 import { ICommandSettings } from "../../structures/interfaces";
 
-// TODO - Have categories for each command and make it so you can't disable admin/moderation commands instead of this
-const cantBeDisabled = ["togglecommand", "sleep"]
+const cantBeDisabled = ["admin"] // Categories of commands that cant be disabled 
 
 const command: ICommandSettings = {
   run: (client, message, args, settings) => {
     const commandName = args[0]!!.toLowerCase();
-    if (!client.commands.get(commandName) || cantBeDisabled.includes(commandName)) {
-      client.reply(message, "That is not a valid command (or that command can't be disabled)!");
+    const command = client.commands.get(commandName);
+    if (!command) {
+      client.reply(message, "That is not a valid command!");
+      return;
+    } 
+
+    if (cantBeDisabled.includes(command.category)) {
+      client.reply(message, "This command cant be disabled!");
       return;
     }
 
