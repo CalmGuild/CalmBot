@@ -2,7 +2,7 @@ import { Message } from "discord.js";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import Client from "../structures/Client";
 
-export default async function message(client: Client, message: Message) {
+export default async function messageCreate(client: Client, message: Message) {
   if (message.author.bot) return;
 
   if (!message.content.toLowerCase().startsWith(client.prefix)) return;
