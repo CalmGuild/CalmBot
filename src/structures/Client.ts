@@ -158,7 +158,7 @@ export default class Client extends DiscordClient {
     channel
       .send(options)
       .then((msg) => onSend(msg))
-      .catch((err) => this.logger.error(err));
+      .catch((err) => this.logger.error(`Error sending a message: ${err}`));
   }
 
   reply(message: Message, options: string | MessagePayload | ReplyMessageOptions, onSend?: (message: Message) => void) {
@@ -167,6 +167,6 @@ export default class Client extends DiscordClient {
       .then((msg) => {
         if (onSend) onSend(msg);
       })
-      .catch((err) => this.logger.error(err));
+      .catch((err) => this.logger.error(`Error replying to message: ${err}`));
   }
 }
