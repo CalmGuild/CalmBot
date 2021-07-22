@@ -3,7 +3,7 @@ import logger from "../logger";
 
 import fs from "fs";
 import path from "path";
-import { ICommand, ICommandSettings, SubCommandSettings } from "./interfaces";
+import { IButtonInteraction, ICommand, ICommandSettings, ISelectMenuInteraction, SubCommandSettings } from "./interfaces";
 import Utils from "../util/Utils";
 import { IGuildSettings } from "../schemas/GuildSettings";
 import PermissionHandler from "../util/PermissionHandler";
@@ -12,6 +12,10 @@ export default class Client extends DiscordClient {
   commands = new Collection<string, ICommand>();
   logger = logger;
   prefix = "c!";
+
+  buttonInteractions: Collection<string, IButtonInteraction> | undefined;
+  selectMenuInteractions: Collection<string, ISelectMenuInteraction> | undefined;
+
   static developers = ["438057670042320896" /* Miqhtie */]; // IDs of calmbot developers
 
   constructor(options: ClientOptions) {
@@ -144,20 +148,26 @@ export default class Client extends DiscordClient {
   }
 
   registerEvents(eventsDir: string) {
-    const files = fs.readdirSync(eventsDir).filter((file) => !fs.statSync(path.join(eventsDir, file)).isDirectory());
+    const files = fs.readdirSync(eventsDir);
     files.forEach((file) => {
-      const eventName = file.split(".")[0]!!;
+      const stats = fs.statSync(path.join(eventsDir, file));
+      if (!stats.isDirectory()) {
+        const eventName = file.split(".")[0]!!;
 
-      const event: () => void = require(path.join(eventsDir, file)).default;
+        const event: () => void = require(path.join(eventsDir, file)).default;
 
-      this.on(eventName, event.bind(null, this));
+        this.on(eventName, event.bind(null, this));
+      } else if (file === "buttons") this.buttonInteractions = this.registerInteractions(path.join(eventsDir, file)) as Collection<string, IButtonInteraction>;
+      else if (file === "selectmenus") this.selectMenuInteractions = this.registerInteractions(path.join(eventsDir, file)) as Collection<string, ISelectMenuInteraction>;
     });
   }
 
-  send(channel: TextChannel | DMChannel | NewsChannel | ThreadChannel, options: string | MessagePayload | MessageOptions, onSend: (message: Message) => void) {
+  send(channel: TextChannel | DMChannel | NewsChannel | ThreadChannel, options: string | MessagePayload | MessageOptions, onSend?: (message: Message) => void) {
     channel
       .send(options)
-      .then((msg) => onSend(msg))
+      .then((msg) => {
+        if (onSend) onSend(msg);
+      })
       .catch((err) => this.logger.error(`Error sending a message: ${err}`));
   }
 
@@ -168,5 +178,18 @@ export default class Client extends DiscordClient {
         if (onSend) onSend(msg);
       })
       .catch((err) => this.logger.error(`Error replying to message: ${err}`));
+  }
+
+  private registerInteractions(dir: string): Collection<string, IButtonInteraction | ISelectMenuInteraction> {
+    let interactions = new Collection<string, IButtonInteraction | ISelectMenuInteraction>();
+    fs.readdirSync(dir)
+      .filter((file) => !fs.statSync(path.join(dir, file)).isDirectory())
+      .forEach((file) => {
+        const name = file.split(".")[0]!!;
+        const event: IButtonInteraction | ISelectMenuInteraction = require(path.join(dir, file)).default;
+
+        interactions.set(name, event);
+      });
+    return interactions;
   }
 }

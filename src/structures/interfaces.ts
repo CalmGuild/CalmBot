@@ -1,7 +1,8 @@
-import { Collection, Message, PermissionString } from "discord.js";
+import { ButtonInteraction, Collection, Message, PermissionString, SelectMenuInteraction } from "discord.js";
 import { IGuildSettings } from "../schemas/GuildSettings";
 import Client from "./Client";
 
+// Commands
 export type Permission = "DEVELOPER" | "ADMIN" | "STAFF" | PermissionString;
 
 export type CommandType = "COMMAND" | "SUB_COMMAND";
@@ -24,3 +25,13 @@ export interface ICommand {
 
 export type SubCommandSettings = Omit<ICommand, "run" | "description" | "usage" | "subcommands" | "type" | "name" | "category">;
 export type ICommandSettings = Omit<ICommand, "subcommands" | "type" | "name" | "category">;
+
+// Interactions
+export interface IButtonInteraction {
+  run: (client: Client, interaction: ButtonInteraction) => void;
+  validator: (interaction: ButtonInteraction) => boolean;
+}
+export interface ISelectMenuInteraction {
+  run: (client: Client, interaction: SelectMenuInteraction) => void;
+  validator: (interaction: SelectMenuInteraction) => boolean;
+}
