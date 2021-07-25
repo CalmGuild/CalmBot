@@ -11,10 +11,10 @@ const command: ICommandSettings = {
       client.commands.forEach((cmd) => {
         if (!categories.includes(cmd.category)) {
           categories.push(cmd.category);
-          const commands = Utils.findAll(client.commands, (v) => v.category === cmd.category)!!
+          const commands = Utils.findAll(client.commands, (command) => command.category === cmd.category)!!
             .map((v) => `${v.name}`)
             .join("\n");
-          embed.addField(Utils.normalizeString(cmd.category), `\`\`\`\n${commands}\`\`\``, true);
+          embed.addField(Utils.normalizeString(`❯ ${cmd.category}`), `\`\`\`\n${commands}\`\`\``, true);
         }
       });
       embed.setFooter(`Do ${client.prefix}help <command> for help with a command!`);
