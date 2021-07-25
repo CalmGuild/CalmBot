@@ -1,12 +1,12 @@
 import { Collection, MessageEmbed } from "discord.js";
-import Channels from "../../data/Channels";
+import constants from "../../util/constants";
 import { ISelectMenuInteraction } from "../../structures/interfaces";
 import Utils from "../../util/Utils";
 
 const suggestionChannels: Collection<string, { name: string; id: string }> = new Collection([
-  ["regular", Channels.SUGGESTIONS],
-  ["emote", Channels.EMOTE_SUGGESTIONS],
-  ["movie", Channels.MOVIE_SUGGESTIONS],
+  ["regular", constants.CHANNELS.SUGGESTIONS],
+  ["emote", constants.CHANNELS.EMOTE_SUGGESTIONS],
+  ["movie", constants.CHANNELS.MOVIE_SUGGESTIONS],
 ]);
 
 const event: ISelectMenuInteraction = {

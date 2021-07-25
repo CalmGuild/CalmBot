@@ -1,5 +1,5 @@
 import { GuildMember } from "discord.js";
-import Roles from "../data/Roles";
+import constants from "../util/constants";
 import Client from "../structures/Client";
 import Utils from "./Utils";
 
@@ -10,7 +10,7 @@ export default class PermissionHandler {
 
   static isAdmin(member: GuildMember): Boolean {
     if (this.isDeveloper(member)) return true;
-    const adminRole = Utils.getRole(member.guild, Roles.ADMIN);
+    const adminRole = Utils.getRole(member.guild, constants.ROLES.ADMIN);
 
     if (adminRole && member.roles.cache.has(adminRole.id)) return true;
 
@@ -19,8 +19,8 @@ export default class PermissionHandler {
 
   static isStaff(member: GuildMember): Boolean {
     if (this.isAdmin(member)) return true;
-    const guildStaff = Utils.getRole(member.guild, Roles.GUILD_STAFF);
-    const discordStaff = Utils.getRole(member.guild, Roles.DISCORD_STAFF);
+    const guildStaff = Utils.getRole(member.guild, constants.ROLES.GUILD_STAFF);
+    const discordStaff = Utils.getRole(member.guild, constants.ROLES.DISCORD_STAFF);
 
     if ((guildStaff && member.roles.cache.has(guildStaff.id)) || (discordStaff && member.roles.cache.has(discordStaff.id))) return true;
     return false;
