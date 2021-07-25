@@ -1,13 +1,7 @@
-import { Collection, MessageEmbed } from "discord.js";
+import { MessageEmbed } from "discord.js";
 import constants from "../../util/constants";
 import { ISelectMenuInteraction } from "../../structures/interfaces";
 import Utils from "../../util/Utils";
-
-const suggestionChannels: Collection<string, { name: string; id: string }> = new Collection([
-  ["regular", constants.CHANNELS.SUGGESTIONS],
-  ["emote", constants.CHANNELS.EMOTE_SUGGESTIONS],
-  ["movie", constants.CHANNELS.MOVIE_SUGGESTIONS],
-]);
 
 const event: ISelectMenuInteraction = {
   run: (client, interaction) => {
@@ -16,14 +10,14 @@ const event: ISelectMenuInteraction = {
       return;
     }
 
-    const channelData = suggestionChannels.get(interaction.values[0]!!.toLowerCase());
+    const channelData = constants.SUGGESTION_CHANNELS.get(interaction.values[0]!!.toLowerCase());
     if (!channelData) {
       interaction.reply({ content: "Invalid suggestion type.", ephemeral: true });
       return;
     }
 
-    const channel = Utils.getChannel(interaction.guild!!, channelData);    
-    
+    const channel = Utils.getChannel(interaction.guild!!, channelData);
+
     if (!channel || !channel.isText()) {
       interaction.reply({ content: "Error creating suggestion: Invalid channel.", ephemeral: true });
       return;

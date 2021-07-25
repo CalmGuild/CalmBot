@@ -16,8 +16,6 @@ export default class Client extends DiscordClient {
   buttonInteractions: Collection<string, IButtonInteraction> | undefined;
   selectMenuInteractions: Collection<string, ISelectMenuInteraction> | undefined;
 
-  static developers = ["438057670042320896" /* Miqhtie */]; // IDs of calmbot developers
-
   constructor(options: ClientOptions) {
     super(options);
   }

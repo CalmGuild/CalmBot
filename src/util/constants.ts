@@ -1,30 +1,76 @@
+import { Collection } from "discord.js";
+
+export const Roles = {
+  ADMIN: {
+    name: "Admin",
+    id: "739711920004923412",
+  },
+  DISCORD_STAFF: {
+    name: "Discord Staff",
+    id: "769723745640120401",
+  },
+  GUILD_STAFF: {
+    name: "Guild Staff",
+    id: "626858736287350784",
+  },
+};
+
+export const Channels = {
+  SUGGESTIONS: {
+    name: "suggestions",
+    id: "770049673657843732",
+  },
+  EMOTE_SUGGESTIONS: {
+    name: "emote-suggestions",
+    id: "627304676957618195",
+  },
+  MOVIE_SUGGESTIONS: {
+    name: "movie-suggestions",
+    id: "713917298674499646",
+  },
+};
+
 export default {
-  ROLES: {
-    ADMIN: {
-      name: "Admin",
-      id: "739711920004923412",
-    },
-    DISCORD_STAFF: {
-      name: "Discord Staff",
-      id: "769723745640120401",
-    },
-    GUILD_STAFF: {
-      name: "Guild Staff",
-      id: "626858736287350784",
-    },
-  },
-  CHANNELS: {
-    SUGGESTIONS: {
-      name: "suggestions",
-      id: "770049673657843732",
-    },
-    EMOTE_SUGGESTIONS: {
-      name: "emote-suggestions",
-      id: "627304676957618195",
-    },
-    MOVIE_SUGGESTIONS: {
-      name: "movie-suggestions",
-      id: "713917298674499646",
-    },
-  },
+  EIGHT_BALL_RESPONSES: [
+    "It is certain",
+    "Processing... I don't care",
+    "It is decidedly so",
+    "Without a doubt",
+    "Yes definitely",
+    "Error: 400. Question too stupid",
+    "You may rely on it",
+    "Im not answering that",
+    "As I see it, yes",
+    "Most likely",
+    "Outlook good",
+    "Yes",
+    "No",
+    "Signs point to yes",
+    "Reply hazy try again",
+    "Ask again later",
+    "Better not tell you now",
+    "Cannot predict now",
+    "This is a perfect discord bot and I can not waste my time with that question",
+    "Concentrate and ask again",
+    "Don't count on it",
+    "My reply is no",
+    "My sources say no",
+    "Outlook not so good",
+    "what??",
+    "Very doubtful",
+    "I don't feel like answering that, continue on with your day",
+  ],
+
+  // Categories that cant be disabled
+  NON_TOGGLEABLE_CATEGORIES: ["admin"],
+
+  // Discord IDs of CalmBot developers
+  DEVELOPERS: ["438057670042320896" /* Miqhtie */],
+
+  // Types of suggestions and which channels they go into
+  SUGGESTION_CHANNELS: new Collection([
+    ["regular", Channels.SUGGESTIONS],
+    ["emote", Channels.EMOTE_SUGGESTIONS],
+    ["movie", Channels.MOVIE_SUGGESTIONS],
+  ]),
 };
