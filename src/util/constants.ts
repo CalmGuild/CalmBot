@@ -73,4 +73,14 @@ export default {
     ["emote", Channels.EMOTE_SUGGESTIONS],
     ["movie", Channels.MOVIE_SUGGESTIONS],
   ]),
+
+  TICKET_ALLOW_PERMISSIONS: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"],
+
+  TICKET_TYPES: new Collection([
+    ["support", "Support 🔧"],
+    ["report", "Report ⚠️"],
+    ["appeal", "Appeal ⛔"],
+    ["bug", "Bug Report 🤖"],
+    ["redeem", "Redeem 💰"],
+  ]),
 };
