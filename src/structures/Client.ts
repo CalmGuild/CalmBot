@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 import { IButtonInteraction, ICommand, ICommandSettings, ISelectMenuInteraction, SubCommandSettings } from "./interfaces";
 import Utils from "../util/Utils";
-import { IGuildSettings } from "../schemas/GuildSettings";
+import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import PermissionHandler from "../util/PermissionHandler";
 
 export default class Client extends DiscordClient {
@@ -176,6 +176,17 @@ export default class Client extends DiscordClient {
         if (onSend) onSend(msg);
       })
       .catch((err) => this.logger.error(`Error replying to message: ${err}`));
+  }
+
+  getSettings(guildID: string): Promise<IGuildSettings> {
+    return new Promise(async (resolve) => {
+      let settings = await GuildSettings.findOne({ guildID: guildID });
+      if (settings === null) {
+        settings = new GuildSettings({ guildID: guildID });
+        await settings.save();
+      }
+      resolve(settings);
+    });
   }
 
   private registerInteractions(dir: string): Collection<string, IButtonInteraction | ISelectMenuInteraction> {
