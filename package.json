@@ -11,7 +11,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "discord.js": "^13.0.0-dev.4d53d0f.1626566655",
+    "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
     "mongoose": "^5.13.3",
     "winston": "^3.3.3"

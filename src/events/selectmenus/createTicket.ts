@@ -1,4 +1,4 @@
-import { GuildMember, MessageButton, MessageEmbed, OverwriteResolvable, PermissionString } from "discord.js";
+import { CategoryChannel, GuildMember, MessageButton, MessageEmbed, OverwriteResolvable, PermissionString } from "discord.js";
 import { ISelectMenuInteraction } from "../../structures/interfaces";
 import constants from "../../util/constants";
 
@@ -43,7 +43,7 @@ const event: ISelectMenuInteraction = {
       if (role) overwrites.push({ allow: <PermissionString[]>constants.TICKET_ALLOW_PERMISSIONS, id: role });
     });
 
-    interaction.guild.channels.create(`ticket-${nextTicketID}`, { permissionOverwrites: overwrites, parent: ticketCategory }).then(async (channel) => {
+    interaction.guild.channels.create(`ticket-${nextTicketID}`, { permissionOverwrites: overwrites, parent: ticketCategory as CategoryChannel }).then(async (channel) => {
       settings.tickets.set(interaction.user.id, channel.id);
       await settings.save();
       const embed = new MessageEmbed()
