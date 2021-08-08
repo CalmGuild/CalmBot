@@ -5,6 +5,9 @@ import mongoose from "mongoose";
 import Client from "./structures/Client";
 import path from "path";
 
+process.on("unhandledException", console.error);
+process.on("unhandledRejection", console.error);
+
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES],
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
