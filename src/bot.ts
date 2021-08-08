@@ -18,6 +18,8 @@ mongoose
   .connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: true,
+    useCreateIndex: true,
   })
   .then(() => {
     client.logger.info("Connected to database.");
