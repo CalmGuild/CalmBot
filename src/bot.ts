@@ -21,9 +21,8 @@ mongoose
   })
   .then(() => {
     client.logger.info("Connected to database.");
+
+    client.registerCommands(path.join(__dirname, "commands"));
+    client.registerEvents(path.join(__dirname, "events"));
+    client.login(process.env.BOT_TOKEN);
   });
-
-client.registerCommands(path.join(__dirname, "commands"));
-client.registerEvents(path.join(__dirname, "events"));
-
-client.login(process.env.BOT_TOKEN);
