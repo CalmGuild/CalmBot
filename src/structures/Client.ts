@@ -12,12 +12,13 @@ export default class Client extends DiscordClient {
   commands = new Collection<string, ICommand>();
   logger = logger;
   prefix = "c!";
-
+  timeInitialized: number;
   buttonInteractions: Collection<string, IButtonInteraction> | undefined;
   selectMenuInteractions: Collection<string, ISelectMenuInteraction> | undefined;
 
   constructor(options: ClientOptions) {
     super(options);
+    this.timeInitialized = Date.now()
   }
 
   registerCommands(commandsDir: string) {
