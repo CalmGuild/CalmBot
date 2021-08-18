@@ -101,6 +101,11 @@ export default class Client extends DiscordClient {
     }
 
     if (message.guild) {
+      if (settings!!.botBlacklist.includes(message.author.id)) {
+        this.reply(message, "You are blacklisted from using this bot!");
+        return;
+      }
+
       if (settings!!.sleep && !PermissionHandler.isAdmin(message.member!!)) {
         this.reply(message, "This bot is on sleep mode!");
         return;

@@ -8,6 +8,7 @@ export interface IGuildSettings extends Document {
   tickets: Collection<string, string>;
   ticketRoles: Array<string>;
   ticketCount: number;
+  botBlacklist: Array<string>;
 }
 
 const GuildSettingsScema = new Schema({
@@ -17,6 +18,7 @@ const GuildSettingsScema = new Schema({
   tickets: { type: Map, default: new Map() },
   ticketRoles: { type: Array<string>(), default: new Array<String>() },
   ticketCount: { type: Number, default: 0 },
+  botBlacklist: { type: Array<string>(), default: new Array<String>() },
 });
 
 export default model<IGuildSettings>("GuildSettings", GuildSettingsScema);
