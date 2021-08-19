@@ -5,9 +5,6 @@ import mongoose from "mongoose";
 import Client from "./structures/Client";
 import path from "path";
 
-process.on("unhandledException", console.error);
-process.on("unhandledRejection", console.error);
-
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES],
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
@@ -28,3 +25,17 @@ mongoose
     client.registerEvents(path.join(__dirname, "events"));
     client.login(process.env.BOT_TOKEN);
   });
+
+process.on("unhandledException", (error) => {
+  console.error(error);
+  if (client.webhook) {
+    client.webhook.sendError(`Unhandled Exception!\n\`\`\`\n${error}\n\`\`\``);
+  }
+});
+
+process.on("unhandledRejection", (error) => {
+  console.error(error);
+  if (client.webhook) {
+    client.webhook.sendError(`Unhandled Rejection!\n\`\`\`\n${error}\n\`\`\``);
+  }
+});
