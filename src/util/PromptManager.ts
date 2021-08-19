@@ -89,7 +89,7 @@ export default class PromptManager {
     });
   }
 
-  confrimation() {
+  confirm() {
     this.callback(this.answers);
     this.exit();
   }

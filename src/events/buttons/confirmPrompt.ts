@@ -20,7 +20,7 @@ const event: IButtonInteraction = {
       return;
     }
 
-    prompt.instance.confrimation();
+    prompt.instance.confirm();
     interaction.message.delete();
   },
   validator: (button) => button.customId.toLowerCase().startsWith("confirmprompt"),
