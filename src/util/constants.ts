@@ -1,4 +1,4 @@
-import { Collection } from "discord.js";
+import { Collection, MessageEmbed } from "discord.js";
 
 export const Roles = {
   ADMIN: {
@@ -83,4 +83,9 @@ export default {
     ["bug", "Bug Report 🤖"],
     ["redeem", "Redeem 💰"],
   ]),
+
+  PROMPT_EMBED: new MessageEmbed({
+    title: "You are now in a prompt",
+    description: "Please answer the following question(s) by typing in an answer and sending it in this channel\n\nYou can exit at any time by pressing the exit button below",
+  }),
 };

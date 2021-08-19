@@ -1,4 +1,4 @@
-import { Channel, Collection, Guild, GuildMember, Role } from "discord.js";
+import { Channel, Collection, Guild, GuildMember, MessageActionRow, MessageButton, Role } from "discord.js";
 import { Permission } from "../structures/interfaces";
 import PermissionHandler from "./PermissionHandler";
 
@@ -45,8 +45,8 @@ export default class Utils {
   }
 
   static findAll<K, V>(collection: Collection<K, V>, fn: (value: V) => boolean): V[] | undefined {
-    let matches: V[] = [];   
-    collection.forEach((v) => {    
+    let matches: V[] = [];
+    collection.forEach((v) => {
       if (fn(v)) matches.push(v);
     });
     if (matches.length === 0) return undefined;
@@ -54,6 +54,22 @@ export default class Utils {
   }
 
   static randomArray<T>(array: T[]): T | undefined {
-    return array[Math.floor(Math.random() * array.length + 0)]
+    return array[Math.floor(Math.random() * array.length + 0)];
+  }
+
+  static disableButtons(components: MessageActionRow[], toDisable: { buttonIds?: string[]; disableAll?: boolean }): MessageActionRow[] {
+    const newComponents: MessageActionRow[] = [];
+    components.forEach((row) => {
+      const newRow = new MessageActionRow();
+      row.components.forEach((component) => {
+        if (component instanceof MessageButton && ((toDisable.buttonIds && toDisable.buttonIds.includes(component.customId!!)) || toDisable.disableAll)) {
+          const newButton = component;
+          newButton.setDisabled(true);
+          newRow.addComponents(newButton);
+        } else newRow.addComponents(component);
+      });
+      newComponents.push(newRow);
+    });
+    return newComponents;
   }
 }

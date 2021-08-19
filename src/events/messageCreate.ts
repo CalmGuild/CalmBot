@@ -1,9 +1,16 @@
 import { Message } from "discord.js";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import Client from "../structures/Client";
+import PromptManager from "../util/PromptManager";
 
 export default async function messageCreate(client: Client, message: Message) {
   if (message.author.bot) return;
+
+  const prompt = PromptManager.prompts.find(prompt => prompt.channel.id === message.channelId && prompt.user.id === message.author.id)?.instance;
+  if (prompt) {
+    prompt.handleResponse(message);
+    return;
+  }
 
   if (!message.content.toLowerCase().startsWith(client.prefix)) return;
 

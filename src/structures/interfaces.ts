@@ -35,3 +35,13 @@ export interface ISelectMenuInteraction {
   run: (client: Client, interaction: SelectMenuInteraction) => void;
   validator: (interaction: SelectMenuInteraction) => boolean;
 }
+// Prompts
+export type PromptCallback = (answers: Collection<string, Message>) => void;
+export interface PromptQuestion {
+  question: string;
+  id: string;
+  validation?: {
+    validator: (answer: Message) => boolean;
+    errorMessage: string;
+  };
+}
