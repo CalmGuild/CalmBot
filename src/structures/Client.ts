@@ -7,6 +7,7 @@ import { IButtonInteraction, ICommand, ICommandSettings, ISelectMenuInteraction,
 import Utils from "../util/Utils";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import PermissionHandler from "../util/PermissionHandler";
+import PrivateWebhookManager from "../util/PrivateWebhookManager";
 
 export default class Client extends DiscordClient {
   commands = new Collection<string, ICommand>();
@@ -15,10 +16,14 @@ export default class Client extends DiscordClient {
   timeInitialized: number;
   buttonInteractions: Collection<string, IButtonInteraction> | undefined;
   selectMenuInteractions: Collection<string, ISelectMenuInteraction> | undefined;
+  webhook: PrivateWebhookManager | undefined;
 
   constructor(options: ClientOptions) {
     super(options);
-    this.timeInitialized = Date.now()
+    this.timeInitialized = Date.now();
+    if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
+      this.webhook = new PrivateWebhookManager(this, { id: process.env.WEBHOOK_ID, token: process.env.WEBHOOK_TOKEN });
+    }
   }
 
   registerCommands(commandsDir: string) {

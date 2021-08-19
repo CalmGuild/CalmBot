@@ -83,4 +83,8 @@ export default {
     ["bug", "Bug Report 🤖"],
     ["redeem", "Redeem 💰"],
   ]),
+
+  INFO_COLOR: "#1f9aff",
+  WARNING_COLOR: "#cce63e",
+  ERROR_COLOR: "#e83313",
 };
