@@ -8,8 +8,8 @@ const command: ICommandSettings = {
     let role: Role | undefined;
     if (new RegExp(MessageMentions.ROLES_PATTERN).test(args[0]!!)) {
       const id = args[0]!!.substring(3, args[0]!!.length - 1);
-      role = message.guild.roles.cache.get(<`${bigint}`>id);
-    } else role = message.guild.roles.cache.get(<`${bigint}`>args[0]);
+      role = message.guild.roles.cache.get(id);
+    } else role = message.guild.roles.cache.get(args[0]!!);
 
     if (!role) {
       client.reply(message, "Couldn't find role!");

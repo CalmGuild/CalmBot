@@ -1,14 +1,14 @@
-import { Channel, Collection, Guild, GuildMember, MessageActionRow, MessageButton, Role } from "discord.js";
+import { Channel, Collection, Guild, GuildMember, MessageActionRow, MessageButton, Role, Snowflake } from "discord.js";
 import { Permission } from "../structures/interfaces";
 import PermissionHandler from "./PermissionHandler";
 
 export default class Utils {
-  static getRole(guild: Guild, role: { name: string; id: string }): Role | undefined {
-    return guild.roles.cache.get(<`${bigint}`>role.id) ?? guild.roles.cache.find((r) => r.name === role.name);
+  static getRole(guild: Guild, role: { name: string; id: Snowflake }): Role | undefined {
+    return guild.roles.cache.get(role.id) ?? guild.roles.cache.find((r) => r.name === role.name);
   }
 
-  static getChannel(guild: Guild, channel: { name: string; id: string }): Channel | undefined {
-    return guild.channels.cache.get(<`${bigint}`>channel.id) ?? guild.channels.cache.find((c) => c.name === channel.name);
+  static getChannel(guild: Guild, channel: { name: string; id: Snowflake }): Channel | undefined {
+    return guild.channels.cache.get(channel.id) ?? guild.channels.cache.find((c) => c.name === channel.name);
   }
 
   static hasPermissions(member: GuildMember, permissions: Permission[]) {

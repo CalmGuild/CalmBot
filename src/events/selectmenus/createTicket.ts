@@ -35,11 +35,11 @@ const event: ISelectMenuInteraction = {
       { allow: <PermissionString[]>constants.TICKET_ALLOW_PERMISSIONS, id: interaction.member.id },
     ];
 
-    settings.ticketRoles = settings.ticketRoles.filter((role) => interaction.guild?.roles.cache.has(<`${bigint}`>role));
+    settings.ticketRoles = settings.ticketRoles.filter((role) => interaction.guild?.roles.cache.has(role));
     await settings.save();
 
     settings.ticketRoles.forEach((roleid) => {
-      const role = interaction.guild!!.roles.cache.get(<`${bigint}`>roleid);
+      const role = interaction.guild!!.roles.cache.get(roleid);
       if (role) overwrites.push({ allow: <PermissionString[]>constants.TICKET_ALLOW_PERMISSIONS, id: role });
     });
 

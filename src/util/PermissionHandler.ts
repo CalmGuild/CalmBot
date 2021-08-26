@@ -20,7 +20,6 @@ export default class PermissionHandler {
     if (this.isAdmin(member)) return true;
     const guildStaff = Utils.getRole(member.guild, Roles.GUILD_STAFF);
     const discordStaff = Utils.getRole(member.guild, Roles.DISCORD_STAFF);
-
     if ((guildStaff && member.roles.cache.has(guildStaff.id)) || (discordStaff && member.roles.cache.has(discordStaff.id))) return true;
     return false;
   }
