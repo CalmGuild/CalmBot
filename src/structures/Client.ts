@@ -8,6 +8,7 @@ import Utils from "../util/Utils";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import PermissionHandler from "../util/PermissionHandler";
 import PrivateWebhookManager from "../util/PrivateWebhookManager";
+import JobManager from "../util/JobManager";
 
 export default class Client extends DiscordClient {
   commands = new Collection<string, ICommand>();
@@ -17,10 +18,12 @@ export default class Client extends DiscordClient {
   buttonInteractions: Collection<string, IButtonInteraction> | undefined;
   selectMenuInteractions: Collection<string, ISelectMenuInteraction> | undefined;
   webhook: PrivateWebhookManager | undefined;
+  jobManager: JobManager;
 
   constructor(options: ClientOptions) {
     super(options);
     this.timeInitialized = Date.now();
+    this.jobManager = new JobManager(this, path.join(__dirname, "../jobs"));
     if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
       this.webhook = new PrivateWebhookManager(this, { id: process.env.WEBHOOK_ID, token: process.env.WEBHOOK_TOKEN });
     }
