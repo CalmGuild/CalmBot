@@ -45,3 +45,14 @@ export interface PromptQuestion {
     errorMessage: string;
   };
 }
+
+// Hypixel
+export interface Player {
+  uuid: string;
+  playername: string;
+  socialMedia?: {
+    links: {
+      DISCORD?: string;
+    };
+  };
+}

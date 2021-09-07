@@ -1,4 +1,5 @@
 import { Channel, Collection, Guild, GuildMember, MessageActionRow, MessageButton, Role, Snowflake } from "discord.js";
+import User, { IUser } from "../schemas/User";
 import { Permission } from "../structures/interfaces";
 import PermissionHandler from "./PermissionHandler";
 
@@ -71,5 +72,17 @@ export default class Utils {
       newComponents.push(newRow);
     });
     return newComponents;
+  }
+
+  static getUser(discordId: string): Promise<IUser> {
+    return new Promise(async (resolve, reject) => {
+      let user: IUser | null = null;
+      user = await User.findOne({discordId: discordId});
+      if (user === null) {
+        user = new User({discordId: discordId})
+        await user.save()
+      }
+      resolve(user);
+    });
   }
 }
