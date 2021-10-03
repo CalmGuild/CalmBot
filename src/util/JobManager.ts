@@ -7,13 +7,13 @@ import Job from "../schemas/Job";
 
 export default class JobManager {
   private client: Client;
-  private jobs = new Collection<string, (data: Map<string, string>) => void>();
+  private jobs = new Collection<string, (data: Map<string, string>, client: Client) => void>();
 
   constructor(client: Client, jobsDirectory: string) {
     this.client = client;
     fs.readdirSync(jobsDirectory).forEach((file) => {
       const name = file.split(".")[0]!!.toLowerCase();
-      const job: (data: Map<string, string>) => void = require(path.join(jobsDirectory, file)).default;
+      const job: (data: Map<string, string>, client: Client) => void = require(path.join(jobsDirectory, file)).default;
       this.jobs.set(name, job);
     });
 
@@ -22,12 +22,12 @@ export default class JobManager {
         if (job.expirationTimestamp > Date.now()) { // job has not passed yet
           setTimeout(() => {
             const callback = this.jobs.get(job.name);
-            if (callback) callback(job.data);
+            if (callback) callback(job.data, this.client);
             job.delete();
           }, job.expirationTimestamp - Date.now());
         } else { // job has passed 
           const callback = this.jobs.get(job.name);
-          if (callback) callback(job.data);
+          if (callback) callback(job.data, this.client);
           job.delete();
         }
       })
@@ -44,7 +44,7 @@ export default class JobManager {
     const job = new Job({ name: name, expirationTimestamp: expirationTime, data: data });
     await job.save();
     setTimeout(() => {
-      this.jobs.get(name)!!(new Map(data));
+      this.jobs.get(name)!!(new Map(data), this.client);
       job.delete();
     }, expirationTime - Date.now());
   }
