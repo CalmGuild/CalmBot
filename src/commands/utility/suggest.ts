@@ -25,7 +25,7 @@ const command: ICommandSettings = {
         { label: "Movie Suggestion", description: "Suggestion for a movie to watch during movie night", value: "movie", emoji: "🎥"}
       ]);
     
-    const exitButton = new MessageButton().setLabel("Exit").setCustomId(`deleteMe_${message.author.id}`).setEmoji("❎").setStyle("DANGER");
+    const exitButton = new MessageButton().setLabel("Exit").setCustomId(`deleteMe_${message.author.id}`).setStyle("DANGER");
     
     const rowOne = new MessageActionRow().addComponents(menu);
     const rowTwo = new MessageActionRow().addComponents(exitButton);

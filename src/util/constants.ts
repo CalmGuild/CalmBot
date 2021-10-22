@@ -13,6 +13,18 @@ export const Roles = {
     name: "Guild Staff",
     id: "626858736287350784",
   },
+  APPLICATIONS_TEAM: {
+    name: "Application Team",
+    id: "598307890607947787",
+  },
+  APP_DENIES: {
+    name: "app-denies",
+    id: "758824744031617084",
+  },
+  WAITLIST: {
+    name: "waitlist",
+    id: "593498585581092864",
+  },
 };
 
 export const Channels = {
@@ -28,6 +40,14 @@ export const Channels = {
     name: "movie-suggestions",
     id: "713917298674499646",
   },
+  APPLICATION_LOG: {
+    name: "apps-log",
+    id: "732635154131976284",
+  },
+  GUILD_STAFF_CHAT: {
+    name: "guild-staff-chat",
+    id: "547923467522015263"
+  }
 };
 
 export default {
@@ -74,7 +94,7 @@ export default {
     ["movie", Channels.MOVIE_SUGGESTIONS],
   ]),
 
-  TICKET_ALLOW_PERMISSIONS: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"],
+  CHANNEL_ALLOW_PERMISSIONS: ["VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "SEND_MESSAGES", "USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "EMBED_LINKS"],
 
   TICKET_TYPES: new Collection([
     ["support", "Support 🔧"],

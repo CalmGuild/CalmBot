@@ -1,7 +1,7 @@
 import { Util } from "discord.js";
 import User from "../../schemas/User";
 import { ICommandSettings } from "../../structures/interfaces";
-import { getPlayer } from "../../util/hypixel";
+import { getPlayerFromName as getPlayer } from "../../util/hypixel";
 import Utils from "../../util/Utils";
 
 const command: ICommandSettings = {

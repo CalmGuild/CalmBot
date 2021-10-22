@@ -32,7 +32,7 @@ const event: ISelectMenuInteraction = {
 
     let overwrites: OverwriteResolvable[] = [
       { deny: "VIEW_CHANNEL", id: interaction.guild.roles.everyone.id },
-      { allow: <PermissionString[]>constants.TICKET_ALLOW_PERMISSIONS, id: interaction.member.id },
+      { allow: <PermissionString[]>constants.CHANNEL_ALLOW_PERMISSIONS, id: interaction.member.id },
     ];
 
     settings.ticketRoles = settings.ticketRoles.filter((role) => interaction.guild?.roles.cache.has(role));
@@ -40,7 +40,7 @@ const event: ISelectMenuInteraction = {
 
     settings.ticketRoles.forEach((roleid) => {
       const role = interaction.guild!!.roles.cache.get(roleid);
-      if (role) overwrites.push({ allow: <PermissionString[]>constants.TICKET_ALLOW_PERMISSIONS, id: role });
+      if (role) overwrites.push({ allow: <PermissionString[]>constants.CHANNEL_ALLOW_PERMISSIONS, id: role });
     });
 
     interaction.guild.channels.create(`ticket-${nextTicketID}`, { permissionOverwrites: overwrites, parent: ticketCategory as CategoryChannel }).then(async (channel) => {

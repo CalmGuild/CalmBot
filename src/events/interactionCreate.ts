@@ -7,23 +7,23 @@ export default async function interactionCreate(client: Client, interaction: Int
   if (!interaction.isMessageComponent()) return;
 
   if (interaction.guildId) {
-    let settings = await GuildSettings.findOne({guildID: interaction.guildId})
+    let settings = await GuildSettings.findOne({ guildID: interaction.guildId });
     if (settings === null) {
-      settings = new GuildSettings({guildID: interaction.guildId});
+      settings = new GuildSettings({ guildID: interaction.guildId });
       await settings.save();
     }
 
     if (settings.botBlacklist.includes(interaction.user.id)) {
-      interaction.reply({content: "You are blacklisted from using the bot!", ephemeral: true});
+      interaction.reply({ content: "You are blacklisted from using the bot!", ephemeral: true });
       return;
     }
   }
 
   if (interaction.isButton()) {
-    const event = Utils.findAll(client.buttonInteractions!!, (e) => e.validator(interaction))
-    if (event) event.forEach((e) => e.run(client, interaction))
+    const event = Utils.findAll(client.buttonInteractions!!, (e) => e.validator(interaction));
+    if (event) event.forEach((e) => e.run(client, interaction));
   } else if (interaction.isSelectMenu()) {
-    const event = Utils.findAll(client.selectMenuInteractions!!, (e) => e.validator(interaction))
-    if (event) event.forEach((e) => e.run(client, interaction))
+    const event = Utils.findAll(client.selectMenuInteractions!!, (e) => e.validator(interaction));
+    if (event) event.forEach((e) => e.run(client, interaction));
   }
 }
