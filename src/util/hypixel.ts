@@ -22,8 +22,7 @@ export function getPlayerFromName(name: string): Promise<Player | null> {
     getUUIDFromName(name)
       .then((uuid) => {
         if (!uuid) resolve(null);
-
-        getPlayer(uuid!!);
+        getPlayer(uuid!!).then(resolve).catch(reject);
       })
       .catch((err) => {
         resolve(null);
