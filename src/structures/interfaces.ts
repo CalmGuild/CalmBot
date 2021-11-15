@@ -56,3 +56,17 @@ export interface Player {
     };
   };
 }
+
+export interface Guild {
+  _id: string;
+  name: string;
+  coins: number;
+  coinsEver: number;
+  created: number;
+  members: { uuid: string; joined: number; expHistory: { [key: string]: number } }[];
+  tagColor: string;
+  exp: number;
+  publiclyListed: boolean;
+  description: string;
+  tag: string;
+}

@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Player } from "../structures/interfaces";
+import { Guild, Player } from "../structures/interfaces";
+import constants from "./constants";
 import getUUIDFromName from "./mojang";
 
 const key = process.env.HYPIXEL_API_KEY;
@@ -26,6 +27,19 @@ export function getPlayerFromName(name: string): Promise<Player | null> {
       })
       .catch((err) => {
         resolve(null);
+      });
+  });
+}
+
+export function getGuild(id = constants.CALM_GUILD_ID): Promise<Guild | null> {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`https://api.hypixel.net/guild?key=${key}&id=${id}`)
+      .then((res) => {
+        resolve(res.data?.guild ?? null);
+      })
+      .catch((err) => {
+        reject(err);
       });
   });
 }

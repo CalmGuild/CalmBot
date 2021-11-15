@@ -25,6 +25,10 @@ export const Roles = {
     name: "waitlist",
     id: "593498585581092864",
   },
+  INACTIVE: {
+    name: "Inactive",
+    id: "909593975759982612"
+  }
 };
 
 export const Channels = {
@@ -47,6 +51,15 @@ export const Channels = {
   GUILD_STAFF_CHAT: {
     name: "guild-staff-chat",
     id: "547923467522015263"
+  },
+  INACTIVITY: {
+    name: "inactivity",
+    id: "909306229787074560"
+  },
+  // Appeals, Applications & Activity teams
+  TRIPLE_A: {
+    name: "triple-a",
+    id: "598314264931074082"
   }
 };
 
@@ -107,4 +120,6 @@ export default {
   INFO_COLOR: "#1f9aff",
   WARNING_COLOR: "#cce63e",
   ERROR_COLOR: "#e83313",
+
+  CALM_GUILD_ID: "5af718d40cf2cbe7a9eeb063"
 };
