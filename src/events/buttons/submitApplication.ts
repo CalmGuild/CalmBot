@@ -48,6 +48,7 @@ const event: IButtonInteraction = {
           components: [acceptButton, denyButton],
         },
       ],
+      allowedMentions: { parse: ["roles"] },
     });
     interaction.reply({
       ephemeral: true,
