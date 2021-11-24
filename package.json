@@ -16,5 +16,6 @@
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.3",
     "winston": "^3.3.3"
-  }
+  },
+  "license": "MIT"
 }
