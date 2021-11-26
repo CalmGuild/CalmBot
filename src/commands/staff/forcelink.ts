@@ -45,7 +45,7 @@ const command: ICommandSettings = {
   usage: "unlink <discordid | @discorduser> <minecraft-name>",
   minArgs: 2,
   guildOnly: true,
-  permissions: ["ADMIN"],
+  permissions: ["STAFF"],
 };
 
 export default command;
