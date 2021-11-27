@@ -1,5 +1,5 @@
 import { ISelectMenuInteraction } from "../../structures/interfaces";
-import PromptManager from "../../util/PromptManager";
+import PromptManager from "../../managers/PromptManager";
 
 const event: ISelectMenuInteraction = {
   run: (client, interaction) => {

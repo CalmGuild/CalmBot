@@ -1,5 +1,5 @@
 import Collection from "@discordjs/collection";
-import { getNameHistoryFromUUID } from "./mojang";
+import { getNameHistoryFromUUID } from "../api/mojang";
 
 export default class MinecraftNameManager {
   private data: Collection<string, string> = new Collection();

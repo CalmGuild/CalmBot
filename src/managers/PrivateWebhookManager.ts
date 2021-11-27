@@ -1,6 +1,6 @@
 import { HexColorString, MessageEmbed, WebhookClient, WebhookClientData, WebhookClientOptions } from "discord.js";
 import Client from "../structures/Client";
-import constants from "./constants";
+import constants from "../util/constants";
 
 export default class PrivateWebhookManager extends WebhookClient {
   private discordClient: Client;

@@ -1,7 +1,7 @@
 import { MessageEmbed, MessageSelectMenu } from "discord.js";
 import User from "../../schemas/User";
 import { ICommandSettings } from "../../structures/interfaces";
-import { getGuild } from "../../util/hypixel";
+import { getGuild } from "../../api/hypixel";
 
 const command: ICommandSettings = {
   run: async (client, message, args, settings) => {

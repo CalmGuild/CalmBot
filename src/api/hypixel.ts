@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Guild, Player } from "../structures/interfaces";
-import constants from "./constants";
+import constants from "../util/constants";
 import getUUIDFromName from "./mojang";
 
 const key = process.env.HYPIXEL_API_KEY;

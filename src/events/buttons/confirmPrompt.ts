@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 import { IButtonInteraction } from "../../structures/interfaces";
-import PromptManager from "../../util/PromptManager";
+import PromptManager from "../../managers/PromptManager";
 
 const event: IButtonInteraction = {
   run: (client, interaction) => {

@@ -1,7 +1,7 @@
 import { MessageEmbed, MessageMentions, User as DiscordUser } from "discord.js";
 import { ICommandSettings } from "../../structures/interfaces";
 import constants from "../../util/constants";
-import { getGuild } from "../../util/hypixel";
+import { getGuild } from "../../api/hypixel";
 import Utils from "../../util/Utils";
 
 const command: ICommandSettings = {

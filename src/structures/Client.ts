@@ -7,9 +7,9 @@ import { IButtonInteraction, ICommand, ICommandSettings, ISelectMenuInteraction,
 import Utils from "../util/Utils";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import PermissionHandler from "../util/PermissionHandler";
-import PrivateWebhookManager from "../util/PrivateWebhookManager";
-import JobManager from "../util/JobManager";
-import MinecraftNameManager from "../util/MinecraftNameManager";
+import PrivateWebhookManager from "../managers/PrivateWebhookManager";
+import JobManager from "../managers/JobManager";
+import MinecraftNameManager from "../managers/MinecraftNameManager";
 
 export default class Client extends DiscordClient {
   commands = new Collection<string, ICommand>();

@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import Client from "../structures/Client";
-import PromptManager from "../util/PromptManager";
+import PromptManager from "../managers/PromptManager";
 
 export default async function messageCreate(client: Client, message: Message) {
   if (message.author.bot) return;
