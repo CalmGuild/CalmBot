@@ -12,20 +12,22 @@ export default class JobManager {
   constructor(client: Client, jobsDirectory: string) {
     this.client = client;
     fs.readdirSync(jobsDirectory).forEach((file) => {
-      const name = file.split(".")[0]!!.toLowerCase();
+      const name = file.split(".")[0]!.toLowerCase();
       const job: (data: Map<string, string>, client: Client) => void = require(path.join(jobsDirectory, file)).default;
       this.jobs.set(name, job);
     });
 
     Job.find().then((jobs) =>
       jobs.forEach(async (job) => {
-        if (job.expirationTimestamp > Date.now()) { // job has not passed yet
+        if (job.expirationTimestamp > Date.now()) {
+          // job has not passed yet
           setTimeout(() => {
             const callback = this.jobs.get(job.name);
             if (callback) callback(job.data, this.client);
             job.delete();
           }, job.expirationTimestamp - Date.now());
-        } else { // job has passed 
+        } else {
+          // job has passed
           const callback = this.jobs.get(job.name);
           if (callback) callback(job.data, this.client);
           job.delete();
@@ -44,7 +46,7 @@ export default class JobManager {
     const job = new Job({ name: name, expirationTimestamp: expirationTime, data: data });
     await job.save();
     setTimeout(() => {
-      this.jobs.get(name)!!(new Map(data), this.client);
+      this.jobs.get(name)!(new Map(data), this.client);
       job.delete();
     }, expirationTime - Date.now());
   }

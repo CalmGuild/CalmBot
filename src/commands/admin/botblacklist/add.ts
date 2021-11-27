@@ -7,10 +7,10 @@ const command: ICommandSettings = {
     if (!settings || !message.guild) return;
 
     let member: GuildMember | void;
-    if (new RegExp(MessageMentions.USERS_PATTERN).test(args[0]!!)) {
-      const id = args[0]!!.substring(3, args[0]!!.length - 1);
+    if (new RegExp(MessageMentions.USERS_PATTERN).test(args[0]!)) {
+      const id = args[0]!.substring(3, args[0]!.length - 1);
       member = await message.guild.members.fetch(id).catch(() => {});
-    } else member = await message.guild.members.fetch(args[0]!!).catch(() => {});
+    } else member = await message.guild.members.fetch(args[0]!).catch(() => {});
 
     if (!member || PermissionHandler.isAdmin(member)) {
       client.reply(message, "Couldn't find member or member cannot be blacklisted!");

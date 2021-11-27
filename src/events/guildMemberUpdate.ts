@@ -11,7 +11,7 @@ export default async function guildMemberUpdate(client: Client, oldMember: Guild
   const waitlistRole = Utils.getRole(newMember.guild, Roles.WAITLIST);
   if (!waitlistRole) return;
   const settings = await client.getSettings(newMember.guild.id);
-  if (newRoles.size > 0 && newRoles.first()!!.id === waitlistRole.id) {
+  if (newRoles.size > 0 && newRoles.first()!.id === waitlistRole.id) {
     // waitlist role added
     if (settings.waitlist.find((w) => w.user === newMember.id)) return; // user already in waitlist
     const user = await User.findOne({ discordId: newMember.id });
@@ -34,7 +34,7 @@ export default async function guildMemberUpdate(client: Client, oldMember: Guild
         `${newMember}\nCongratulations, you’ve made it to our waitlist\nWhile waiting:\n  • Read the pinned message in this channel\n  • Read our rules\n  • Come talk to us in general! <3\n\nIf you have any questions please open a ticket and we would be happy to help\nOnce a spot opens up for you, you will be pinged here!`
       );
     }
-  } else if (oldRoles.size > 0 && oldRoles.first()!!.id === waitlistRole.id) {
+  } else if (oldRoles.size > 0 && oldRoles.first()!.id === waitlistRole.id) {
     const waitlistMember = settings.waitlist.find((w) => w.user === newMember.id);
     if (!waitlistMember) return;
     settings.waitlist = settings.waitlist.filter((ele) => ele !== waitlistMember);

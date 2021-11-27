@@ -21,15 +21,15 @@ const command: ICommandSettings = {
       return;
     }
 
-    if (user.inGuild || settings!!.waitlist.find((w) => w.user === message.author.id)) {
+    if (user.inGuild || settings!.waitlist.find((w) => w.user === message.author.id)) {
       message.reply(`You are already in the guild or on the waitlist!`);
       return;
     }
 
     const exitingApplication = settings?.applicants.get(message.author.id);
     if (exitingApplication) {
-      if (!message.guild!!.channels.cache.has(exitingApplication.channelId)) {
-        settings!!.applicants.delete(message.author.id);
+      if (!message.guild!.channels.cache.has(exitingApplication.channelId)) {
+        settings!.applicants.delete(message.author.id);
         await settings?.save();
       } else {
         message.reply(`You already got an application open ${exitingApplication.pendingReview ? "that is pending review" : `<#${exitingApplication.channelId}>`}`);
@@ -38,19 +38,19 @@ const command: ICommandSettings = {
     }
 
     let overwrites: OverwriteResolvable[] = [
-      { deny: "VIEW_CHANNEL", id: message.guild!!.roles.everyone.id },
+      { deny: "VIEW_CHANNEL", id: message.guild!.roles.everyone.id },
       { allow: <PermissionString[]>constants.CHANNEL_ALLOW_PERMISSIONS, id: message.author.id },
     ];
 
-    const applicationsTeam = Utils.getRole(message.guild!!, Roles.APPLICATIONS_TEAM);
+    const applicationsTeam = Utils.getRole(message.guild!, Roles.APPLICATIONS_TEAM);
     if (applicationsTeam) overwrites.push({ allow: <PermissionString[]>constants.CHANNEL_ALLOW_PERMISSIONS, id: applicationsTeam.id });
 
-    const applicationCategory = message.guild!!.channels.cache.find((c) => c.name.toLowerCase() === "apps" && c.type === "GUILD_CATEGORY") as CategoryChannel;
+    const applicationCategory = message.guild!.channels.cache.find((c) => c.name.toLowerCase() === "apps" && c.type === "GUILD_CATEGORY") as CategoryChannel;
     const name = await client.minecraftNames.getName(user.minecraftUUID);
     message.guild?.channels
       .create(`app-${name}`, { topic: `${name}'s guild application`, parent: applicationCategory, permissionOverwrites: overwrites })
       .then(async (channel) => {
-        settings!!.applicants.set(message.author.id, { channelId: channel.id, pendingReview: false });
+        settings!.applicants.set(message.author.id, { channelId: channel.id, pendingReview: false });
         await settings?.save();
         const embed = new MessageEmbed()
           .setTitle("Calm Guild Application")

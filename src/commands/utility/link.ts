@@ -12,21 +12,23 @@ const command: ICommandSettings = {
       return;
     }
 
-    const player = await getPlayer(args[0]!!);
+    const player = await getPlayer(args[0]!);
     if (!player) {
       message.reply(`Error: Could not find player.\nIf you believe this is an error please open a support ticket so we can help!`);
       return;
     }
 
-    const alreadyExistingUser = await User.findOne({minecraftUUID: player.uuid})
-    
+    const alreadyExistingUser = await User.findOne({ minecraftUUID: player.uuid });
+
     if (alreadyExistingUser !== null) {
       message.reply(`Error: The UUID of this player is already linked to a discord account.\nIf you believe this is an error please open a support ticket so we can help!`);
       return;
     }
 
     if (!player.socialMedia?.links.DISCORD) {
-      message.reply(`Error: No discord linked to hypixel.\nHow to link discord to hypixel: https://hypixel.net/threads/guide-how-to-link-discord-to-your-hypixel-profile.3179351/\n\nIf you believe this is an error please open a support ticket so we can help!`);
+      message.reply(
+        `Error: No discord linked to hypixel.\nHow to link discord to hypixel: https://hypixel.net/threads/guide-how-to-link-discord-to-your-hypixel-profile.3179351/\n\nIf you believe this is an error please open a support ticket so we can help!`
+      );
       return;
     }
 

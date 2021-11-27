@@ -6,14 +6,14 @@ export default class MinecraftNameManager {
 
   getName(uuid: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      if (this.data.get(uuid)) resolve(this.data.get(uuid)!!);
+      if (this.data.get(uuid)) resolve(this.data.get(uuid)!);
       getNameHistoryFromUUID(uuid)
         .then((names) => {
           const name = names[names.length - 1]?.name;
           if (!name) reject(null);
-          this.data.set(uuid, name!!);
+          this.data.set(uuid, name!);
           setTimeout(() => this.removeUUIDFromCache(uuid), 12 * 60 * 60 * 1000);
-          resolve(name!!);
+          resolve(name!);
         })
         .catch((err) => {
           reject(err);

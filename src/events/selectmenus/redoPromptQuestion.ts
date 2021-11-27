@@ -4,8 +4,8 @@ import PromptManager from "../../util/PromptManager";
 const event: ISelectMenuInteraction = {
   run: (client, interaction) => {
     const args = interaction.customId.split("_");
-    const channelId = args[1]!!;
-    const userId = args[2]!!;
+    const channelId = args[1]!;
+    const userId = args[2]!;
 
     if (userId !== interaction.user.id) {
       interaction.reply({ content: "You cannot do that!", ephemeral: true });
@@ -23,7 +23,7 @@ const event: ISelectMenuInteraction = {
       return;
     }
 
-    const index = parseInt(interaction.values[0]!!);
+    const index = parseInt(interaction.values[0]!);
     prompt.instance.handleRedo(index, interaction);
   },
   validator: (interaction) => interaction.customId.toLowerCase().startsWith("redopromptquestion"),

@@ -46,7 +46,7 @@ export default class Client extends DiscordClient {
       files.forEach((file) => {
         const stats = fs.statSync(path.join(dir, file));
         if (stats.isFile()) {
-          const commandName = file.split(".")[0]!!.toLowerCase();
+          const commandName = file.split(".")[0]!.toLowerCase();
           const command: ICommandSettings = require(path.join(dir, file)).default;
 
           if (!files.includes(commandName) && commandName !== "subcommandsettings")
@@ -103,7 +103,7 @@ export default class Client extends DiscordClient {
     let subcommandName: string | undefined;
     if (command.type === "SUB_COMMAND") {
       const newArgs = args.slice(0); // prevent args from being shifted
-      const cmd = newArgs.shift()?.toLowerCase()!!;
+      const cmd = newArgs.shift()?.toLowerCase()!;
       if (command.subcommands?.has(cmd) || command.subcommands?.find((subcommand) => (subcommand.aliases ? subcommand.aliases.includes(cmd) : false))) subcommandName = args.shift()?.toLowerCase();
     }
 
@@ -113,22 +113,22 @@ export default class Client extends DiscordClient {
     }
 
     if (message.guild) {
-      if (settings!!.botBlacklist.includes(message.author.id)) {
+      if (settings!.botBlacklist.includes(message.author.id)) {
         this.reply(message, "You are blacklisted from using this bot!");
         return;
       }
 
-      if (settings!!.sleep && !PermissionHandler.isAdmin(message.member!!)) {
+      if (settings!.sleep && !PermissionHandler.isAdmin(message.member!)) {
         this.reply(message, "This bot is on sleep mode!");
         return;
       }
 
-      if (settings!!.disabledCommands.includes(command.name) && !PermissionHandler.isAdmin(message.member!!)) {
+      if (settings!.disabledCommands.includes(command.name) && !PermissionHandler.isAdmin(message.member!)) {
         this.reply(message, "This command is disabled!");
         return;
       }
 
-      if (command.permissions && !Utils.hasPermissions(message.member!!, command.permissions)) {
+      if (command.permissions && !Utils.hasPermissions(message.member!, command.permissions)) {
         this.reply(message, {
           content: `You are missing the following permission(s) to run this command\n${command.permissions
             .map((perm) => `\`${perm}\`,`)
@@ -147,7 +147,7 @@ export default class Client extends DiscordClient {
     if (command.type === "SUB_COMMAND") {
       let subcommand: ICommand | undefined;
       if (subcommandName) {
-        subcommand = command.subcommands?.get(subcommandName) ?? command.subcommands?.find((cmd) => (cmd.aliases ? cmd.aliases.includes(subcommandName!!) : false));
+        subcommand = command.subcommands?.get(subcommandName) ?? command.subcommands?.find((cmd) => (cmd.aliases ? cmd.aliases.includes(subcommandName!) : false));
       } else if (command.defaultSubCommand) {
         subcommand = command.subcommands?.get(command.defaultSubCommand);
       }
@@ -167,7 +167,7 @@ export default class Client extends DiscordClient {
     files.forEach((file) => {
       const stats = fs.statSync(path.join(eventsDir, file));
       if (!stats.isDirectory()) {
-        const eventName = file.split(".")[0]!!;
+        const eventName = file.split(".")[0]!;
 
         const event: () => void = require(path.join(eventsDir, file)).default;
 
@@ -211,7 +211,7 @@ export default class Client extends DiscordClient {
     fs.readdirSync(dir)
       .filter((file) => !fs.statSync(path.join(dir, file)).isDirectory())
       .forEach((file) => {
-        const name = file.split(".")[0]!!;
+        const name = file.split(".")[0]!;
         const event: IButtonInteraction | ISelectMenuInteraction = require(path.join(dir, file)).default;
 
         interactions.set(name, event);

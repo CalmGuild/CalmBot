@@ -6,7 +6,7 @@ import Utils from "../../util/Utils";
 
 const event: IButtonInteraction = {
   run: async (client, interaction) => {
-    const userId = interaction.customId.split("_")[1]!!;
+    const userId = interaction.customId.split("_")[1]!;
     if (interaction.user.id !== userId) {
       interaction.reply({ ephemeral: true, content: "Only the person who created this application may submit it." });
       return;
@@ -16,8 +16,8 @@ const event: IButtonInteraction = {
 
     await interaction.channel.permissionOverwrites.edit(userId, { VIEW_CHANNEL: false });
 
-    const settings = await client.getSettings(interaction.guild!!.id)!!;
-    settings.applicants.set(userId, { channelId: interaction.channelId!!, pendingReview: true });
+    const settings = await client.getSettings(interaction.guild!.id)!;
+    settings.applicants.set(userId, { channelId: interaction.channelId!, pendingReview: true });
     await settings.save();
 
     interaction.user
@@ -33,7 +33,7 @@ const event: IButtonInteraction = {
 
     const user = await User.findOne({ discordId: interaction.user.id });
 
-    const applicationTeam = Utils.getRole(interaction.guild!!, Roles.APPLICATIONS_TEAM);
+    const applicationTeam = Utils.getRole(interaction.guild!, Roles.APPLICATIONS_TEAM);
     const embed = new MessageEmbed().setTitle("Application Submited").setDescription(`${interaction.user.tag} has submited their application and it is ready for review.\n\nMC UUID: ${user?.minecraftUUID ?? "N/A"}`);
 
     const acceptButton = new MessageButton().setCustomId(`acceptApplication_${userId}`).setStyle("SUCCESS").setLabel("Accept");

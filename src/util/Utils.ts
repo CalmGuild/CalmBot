@@ -63,7 +63,7 @@ export default class Utils {
     components.forEach((row) => {
       const newRow = new MessageActionRow();
       row.components.forEach((component) => {
-        if (component instanceof MessageButton && ((toDisable.buttonIds && toDisable.buttonIds.includes(component.customId!!)) || toDisable.disableAll)) {
+        if (component instanceof MessageButton && ((toDisable.buttonIds && toDisable.buttonIds.includes(component.customId!)) || toDisable.disableAll)) {
           const newButton = component;
           newButton.setDisabled(true);
           newRow.addComponents(newButton);
@@ -77,10 +77,10 @@ export default class Utils {
   static getUser(discordId: string): Promise<IUser> {
     return new Promise(async (resolve, reject) => {
       let user: IUser | null = null;
-      user = await User.findOne({discordId: discordId});
+      user = await User.findOne({ discordId: discordId });
       if (user === null) {
-        user = new User({discordId: discordId})
-        await user.save()
+        user = new User({ discordId: discordId });
+        await user.save();
       }
       resolve(user);
     });

@@ -3,7 +3,7 @@ import Constants from "../../util/constants";
 
 const command: ICommandSettings = {
   run: (client, message, args, settings) => {
-    const commandName = args[0]!!.toLowerCase();
+    const commandName = args[0]!.toLowerCase();
     const command = client.commands.get(commandName);
     if (!command) {
       client.reply(message, "That is not a valid command!");
@@ -15,8 +15,8 @@ const command: ICommandSettings = {
       return;
     }
 
-    if (settings!!.disabledCommands.includes(commandName)) {
-      settings!!.disabledCommands = settings!!.disabledCommands.filter((ele) => ele !== commandName);
+    if (settings!.disabledCommands.includes(commandName)) {
+      settings!.disabledCommands = settings!.disabledCommands.filter((ele) => ele !== commandName);
       settings?.save().then(() => {
         client.reply(message, "Enabled the command!");
       });

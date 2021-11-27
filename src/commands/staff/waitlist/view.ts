@@ -7,11 +7,11 @@ const command: ICommandSettings = {
       return;
     }
     let waitlist = "**Current Waitlist**\n*This is the order in who gets to join first*\n\n";
-    settings!!.waitlist.forEach(async (user, i) => {
+    settings!.waitlist.forEach(async (user, i) => {
       const name = await client.minecraftNames.getName(user.uuid);
       waitlist += `${i + 1}. ${name}${user.isFrozen ? " | **Frozen**" : user.informed ? " | **Informed**" : ""}`;
 
-      if (i === settings!!.waitlist.length - 1) {
+      if (i === settings!.waitlist.length - 1) {
         waitlist += "\n\n**Informed**: informed of open guild slot they can join\n**Frozen**: frozen in place for any reason";
         message.reply(waitlist);
       } else waitlist += "\n";

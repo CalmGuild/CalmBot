@@ -11,7 +11,7 @@ const command: ICommandSettings = {
       client.commands.forEach((cmd) => {
         if (!categories.includes(cmd.category)) {
           categories.push(cmd.category);
-          const commands = Utils.findAll(client.commands, (command) => command.category === cmd.category)!!
+          const commands = Utils.findAll(client.commands, (command) => command.category === cmd.category)!
             .map((v) => `${v.name}`)
             .join("\n");
           embed.addField(Utils.normalizeString(`❯ ${cmd.category}`), `\`\`\`\n${commands}\`\`\``, true);
@@ -21,7 +21,7 @@ const command: ICommandSettings = {
       client.reply(message, { embeds: [embed] });
       return;
     } else {
-      const command = client.commands.get(args[0].toLowerCase()) ?? client.commands.find((cmd) => (cmd.aliases ? cmd.aliases.includes(args[0]!!.toLowerCase()) : false));
+      const command = client.commands.get(args[0].toLowerCase()) ?? client.commands.find((cmd) => (cmd.aliases ? cmd.aliases.includes(args[0]!.toLowerCase()) : false));
       if (!command) {
         client.reply(message, "Invalid command.");
         return;

@@ -7,13 +7,13 @@ const command: ICommandSettings = {
     let user: IUser | null = null;
 
     let discordUser: DiscordUser | void;
-    if (new RegExp(MessageMentions.USERS_PATTERN).test(args[0]!!)) {
-      const id = args[0]!!.substring(3, args[0]!!.length - 1);
+    if (new RegExp(MessageMentions.USERS_PATTERN).test(args[0]!)) {
+      const id = args[0]!.substring(3, args[0]!.length - 1);
       discordUser = await client.users.fetch(id).catch(() => {});
-    } else discordUser = await client.users.fetch(args[0]!!).catch(() => {});
+    } else discordUser = await client.users.fetch(args[0]!).catch(() => {});
 
     if (!discordUser) {
-      user = await User.findOne({minecraftUUID: args[0]!!})
+      user = await User.findOne({minecraftUUID: args[0]!})
     } else {
       user = await User.findOne({discordId: discordUser.id})
     }

@@ -44,11 +44,11 @@ export default class PromptManager {
         },
       ],
     });
-    this.askQuestion(this.questions[0]!!);
+    this.askQuestion(this.questions[0]!);
   }
 
   handleResponse(message: Message) {
-    const question = this.questions[this.currentIndex]!!;
+    const question = this.questions[this.currentIndex]!;
     if (question.validation && !question.validation.validator(message)) {
       this.askQuestion(question, `**Error:** ${question.validation.errorMessage}`);
       return;
@@ -76,13 +76,13 @@ export default class PromptManager {
     }
 
     this.currentIndex++;
-    this.askQuestion(this.questions[this.currentIndex]!!);
+    this.askQuestion(this.questions[this.currentIndex]!);
   }
 
   handleRedo(questionIndex: number, interaction: SelectMenuInteraction) {
     this.redo = true;
     this.currentIndex = questionIndex;
-    const question = this.questions[questionIndex]!!;
+    const question = this.questions[questionIndex]!;
     interaction.reply({
       content: "Please retype the answer to this question",
       embeds: [{ author: { name: this.user.username, iconURL: this.user.avatarURL() ?? undefined }, description: `**#${questionIndex + 1}:** ${question.question}`, color: "#32c5fa" }],

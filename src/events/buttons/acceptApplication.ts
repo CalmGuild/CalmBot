@@ -4,8 +4,8 @@ import Utils from "../../util/Utils";
 
 const event: IButtonInteraction = {
   run: async (client, interaction) => {
-    const userId = interaction.customId.split("_")[1]!!;
-    const settings = await client.getSettings(interaction.guild!!.id)!!;
+    const userId = interaction.customId.split("_")[1]!;
+    const settings = await client.getSettings(interaction.guild!.id)!;
 
     const application = settings.applicants.get(userId);
     if (!application) {
@@ -16,7 +16,7 @@ const event: IButtonInteraction = {
     interaction.guild?.members
       .fetch(userId)
       .then((member) => {
-        const role = Utils.getRole(interaction.guild!!, Roles.WAITLIST);
+        const role = Utils.getRole(interaction.guild!, Roles.WAITLIST);
         if (!role) {
           interaction.reply("Couldn't find waitlist role.");
           return;

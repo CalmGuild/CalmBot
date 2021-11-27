@@ -10,13 +10,13 @@ const event: ISelectMenuInteraction = {
       return;
     }
 
-    const channelData = constants.SUGGESTION_CHANNELS.get(interaction.values[0]!!.toLowerCase());
+    const channelData = constants.SUGGESTION_CHANNELS.get(interaction.values[0]!.toLowerCase());
     if (!channelData) {
       interaction.reply({ content: "Invalid suggestion type.", ephemeral: true });
       return;
     }
 
-    const channel = Utils.getChannel(interaction.guild!!, channelData);
+    const channel = Utils.getChannel(interaction.guild!, channelData);
 
     if (!channel || !channel.isText()) {
       interaction.reply({ content: "Error creating suggestion: Invalid channel.", ephemeral: true });
@@ -28,7 +28,7 @@ const event: ISelectMenuInteraction = {
       .then((member) => {
         const embed = new MessageEmbed().setTitle("Suggestion:").setFooter(member.displayName, member.user.displayAvatarURL()).setTimestamp().setColor("#007FFF");
         if (interaction.message.embeds[0]?.description) embed.setDescription(interaction.message.embeds[0]?.description);
-        if (interaction.message.embeds[0]?.image) embed.setImage(interaction.message.embeds[0]?.image.url!!);
+        if (interaction.message.embeds[0]?.image) embed.setImage(interaction.message.embeds[0]?.image.url!);
 
         channel.send({ embeds: [embed] }).then((message) => {
           message.react("✅");

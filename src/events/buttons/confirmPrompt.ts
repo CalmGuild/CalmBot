@@ -6,8 +6,8 @@ const event: IButtonInteraction = {
   run: (client, interaction) => {
     if (!(interaction.message instanceof Message)) return;
     const args = interaction.customId.split("_");
-    const channelId = args[1]!!;
-    const userId = args[2]!!;
+    const channelId = args[1]!;
+    const userId = args[2]!;
 
     if (userId !== interaction.user.id) {
       interaction.reply({ content: "You cannot do that!", ephemeral: true });

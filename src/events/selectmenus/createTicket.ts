@@ -16,7 +16,7 @@ const event: ISelectMenuInteraction = {
       return;
     }
 
-    const type = constants.TICKET_TYPES.get(interaction.values[0]!!);
+    const type = constants.TICKET_TYPES.get(interaction.values[0]!);
     if (!type) {
       interaction.reply({ content: `Error: Invalid ticket type`, ephemeral: true });
       return;
@@ -39,7 +39,7 @@ const event: ISelectMenuInteraction = {
     await settings.save();
 
     settings.ticketRoles.forEach((roleid) => {
-      const role = interaction.guild!!.roles.cache.get(roleid);
+      const role = interaction.guild!.roles.cache.get(roleid);
       if (role) overwrites.push({ allow: <PermissionString[]>constants.CHANNEL_ALLOW_PERMISSIONS, id: role });
     });
 

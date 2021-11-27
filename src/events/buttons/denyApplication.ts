@@ -3,8 +3,8 @@ import PromptManager from "../../util/PromptManager";
 
 const event: IButtonInteraction = {
   run: async (client, interaction) => {
-    const userId = interaction.customId.split("_")[1]!!;
-    const settings = await client.getSettings(interaction.guild!!.id)!!;
+    const userId = interaction.customId.split("_")[1]!;
+    const settings = await client.getSettings(interaction.guild!.id)!;
 
     const application = settings.applicants.get(userId);
     if (!application) {
@@ -15,7 +15,7 @@ const event: IButtonInteraction = {
     new PromptManager(
       client,
       interaction.user,
-      interaction.channel!!,
+      interaction.channel!,
       [
         {
           id: "reason",
@@ -24,10 +24,13 @@ const event: IButtonInteraction = {
         },
       ],
       async (answers) => {
-        const reason = answers.get("reason")!!;
-        client.users.fetch(userId).then((user) => {
-          user.send(`Sorry your application to calm has been denied because of:\n${reason}\n\nIf you have any questions please open a ticket in discord.gg/calm and we would be happy to help`);
-        }).catch()
+        const reason = answers.get("reason")!;
+        client.users
+          .fetch(userId)
+          .then((user) => {
+            user.send(`Sorry your application to calm has been denied because of:\n${reason}\n\nIf you have any questions please open a ticket in discord.gg/calm and we would be happy to help`);
+          })
+          .catch();
         settings.applicants.delete(userId);
         await settings.save();
         interaction.channel?.delete();
