@@ -11,7 +11,7 @@ const client = new Client({
   allowedMentions: { parse: ["users"], repliedUser: true },
 });
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`).then(() => {
+mongoose.connect(process.env.MONGO_URL!).then(() => {
   client.logger.info("Connected to database.");
 
   client.registerCommands(path.join(__dirname, "commands"));
