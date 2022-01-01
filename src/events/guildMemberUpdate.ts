@@ -26,7 +26,7 @@ export default async function guildMemberUpdate(client: Client, oldMember: Guild
     const channel = newMember.guild.channels.cache.get(settings.waitlistChannel!);
     if (!channel || !channel.isText()) settings.waitlistChannel = undefined;
 
-    newMember.send({ embeds: [new MessageEmbed().setDescription(`Congratulations you have been accepted and are now on the calm waitlist!${channel ? `\n${channel}` : ""}`)] }).catch();
+    newMember.send({ embeds: [new MessageEmbed().setDescription(`Congratulations you have been accepted and are now on the calm waitlist!${channel ? `\n${channel}` : ""}`)] }).catch(() => {});
     await settings.save();
 
     if (channel && channel.isText()) {

@@ -29,7 +29,7 @@ const event: IButtonInteraction = {
           },
         ],
       })
-      .catch();
+      .catch(() => {});
 
     const user = await User.findOne({ discordId: interaction.user.id });
 
