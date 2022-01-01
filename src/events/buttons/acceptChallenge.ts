@@ -44,7 +44,7 @@ const event: IButtonInteraction = {
         user
           .send({ embeds: [embed] })
           .then(() => {
-            interaction.reply("Challenge accepted");
+            interaction.reply(`Challenge accepted by ${interaction.user}`);
           })
           .catch(() => {
             const channel = Utils.getChannel(interaction.guild!, Channels.CHALLENGE_PROOF);
@@ -53,7 +53,7 @@ const event: IButtonInteraction = {
               return;
             }
             channel.send({ content: user.toString(), embeds: [embed] });
-            interaction.reply(`Challenge accepted. User informed in ${channel} since their DMs were closed`);
+            interaction.reply(`Challenge accepted by ${interaction.user}. User informed in ${channel} since their DMs were closed`);
           });
       })
       .catch((err) => {

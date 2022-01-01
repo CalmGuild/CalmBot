@@ -49,7 +49,7 @@ const event: IButtonInteraction = {
             user
               .send({ embeds: [embed] })
               .then(() => {
-                interaction.followUp("Challenge denied");
+                interaction.followUp(`Challenge denied by ${interaction.user}`);
               })
               .catch(() => {
                 const channel = Utils.getChannel(interaction.guild!, Channels.CHALLENGE_PROOF);
@@ -58,7 +58,7 @@ const event: IButtonInteraction = {
                   return;
                 }
                 channel.send({ content: user.toString(), embeds: [embed] });
-                interaction.followUp(`Challenge denied. User informed in ${channel} since their DMs were closed`);
+                interaction.followUp(`Challenge denied by ${interaction.user}. User informed in ${channel} since their DMs were closed`);
               });
           })
           .catch((err) => {
