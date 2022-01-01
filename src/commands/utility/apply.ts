@@ -66,6 +66,7 @@ const command: ICommandSettings = {
         const exitButton = new MessageButton().setStyle("DANGER").setLabel("Exit").setCustomId(`exitApplication_${message.author.id}`);
 
         channel.send({ content: message.author.toString(), embeds: [embed], components: [{ type: "ACTION_ROW", components: [submitButton, exitButton] }] });
+        message.reply(`Created your application, ${channel}`)
       })
       .catch((err) => {
         if (client.webhook) client.webhook.sendError(err);
