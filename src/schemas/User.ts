@@ -9,6 +9,8 @@ export interface IUser extends Document {
   inactivePending?: boolean;
   inactiveReason?: string;
   inactiveExpires?: number;
+  completedChallenges?: string[];
+  pendingChallenges?: string[];
 }
 
 const UserSchema = new Schema({
@@ -19,6 +21,8 @@ const UserSchema = new Schema({
   inactivePending: { type: Boolean, default: false },
   inactiveReason: { type: String },
   inactiveExpires: { type: Number },
+  completedChallenges: { type: Array },
+  pendingChallenges: { type: Array },
 });
 
 export default model<IUser>("Users", UserSchema);

@@ -17,17 +17,17 @@ export const Roles = {
     name: "Application Team",
     id: "598307890607947787",
   },
-  APP_DENIES: {
-    name: "app-denies",
-    id: "758824744031617084",
-  },
   WAITLIST: {
     name: "waitlist",
     id: "593498585581092864",
   },
   INACTIVE: {
     name: "Inactive",
-    id: "909593975759982612"
+    id: "909593975759982612",
+  },
+  MONTHLY_CHALLENGES_TEAM: {
+    name: "Monthly Challenges Team",
+    id: "764901345353400350"
   }
 };
 
@@ -44,22 +44,21 @@ export const Channels = {
     name: "movie-suggestions",
     id: "713917298674499646",
   },
-  APPLICATION_LOG: {
-    name: "apps-log",
-    id: "732635154131976284",
-  },
   GUILD_STAFF_CHAT: {
     name: "guild-staff-chat",
-    id: "547923467522015263"
+    id: "547923467522015263",
   },
   INACTIVITY: {
     name: "inactivity",
-    id: "909306229787074560"
+    id: "909306229787074560",
   },
-  // Appeals, Applications & Activity teams
-  TRIPLE_A: {
-    name: "triple-a",
-    id: "598314264931074082"
+  CHALLENGE_REQUESTS: {
+    name: "challenge-requests",
+    id: "787202572032278539",
+  },
+  CHALLENGE_PROOF: {
+    name: "challenge-proof",
+    id: "694564620303597608"
   }
 };
 
@@ -121,5 +120,5 @@ export default {
   WARNING_COLOR: "#cce63e",
   ERROR_COLOR: "#e83313",
 
-  CALM_GUILD_ID: "5af718d40cf2cbe7a9eeb063"
+  CALM_GUILD_ID: "5af718d40cf2cbe7a9eeb063",
 };
