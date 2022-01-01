@@ -25,7 +25,7 @@ const command: ICommandSettings = {
       return;
     }
 
-    if (!player.socialMedia?.links.DISCORD) {
+    if (!player.socialMedia?.links?.DISCORD) {
       message.reply(
         `Error: No discord linked to hypixel.\nHow to link discord to hypixel: https://hypixel.net/threads/guide-how-to-link-discord-to-your-hypixel-profile.3179351/\n\nIf you believe this is an error please open a support ticket so we can help!`
       );
