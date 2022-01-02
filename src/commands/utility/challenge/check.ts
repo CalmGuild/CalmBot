@@ -45,7 +45,7 @@ const command: ICommandSettings = {
 
     const embed = new MessageEmbed()
       .setTitle("Challenge Status")
-      .setDescription("Easy: 1pt\nMedium: 2pts\nHard: 3pts")
+      .setDescription("Easy: 1pt\nMedium: 3pts\nHard: 5pts")
       .addField(
         `Completed Challenges IDs (${currentPoints} points):`,
         user

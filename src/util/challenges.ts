@@ -80,140 +80,140 @@ export default new Collection<string, Challenge>([
     "m1",
     {
       name: "Get 6 kills and win in solo SW",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m2",
     {
       name: "Get 1k points in TDM cvc",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m3",
     {
       name: "Teamwipe a team in 4s bw",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m4",
     {
       name: "Win creeper attack",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m5",
     {
       name: "Take a screenie with a YT or Admin",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m6",
     {
       name: "Win a solo quakecraft game",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m7",
     {
       name: "Win a game of party games with 24 stars",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m8",
     {
       name: "Get a 50 ws in any duel mode",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m9",
     {
       name: "Kill the same player 5 times in a row (solo bw)",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "m10",
     {
       name: "5-0 your opponent in solo bridge",
-      points: 2,
+      points: 3,
     },
   ],
   [
     "h1",
     {
       name: "Place top heal/dmg in Warlords",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h2",
     {
       name: "Win solo sw with every challenge",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h3",
     {
       name: "Win a game of UHC",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h4",
     {
       name: "Get a 8 or 9 kill solo sw win",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h5",
     {
       name: "Get a 50 ws in bedwars",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h6",
     {
       name: "Kill every survivor in vampirez",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h7",
     {
       name: "Get 250k+ gexp in 1 day",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h8",
     {
       name: "Add hopez on Hypixel",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h9",
     {
       name: "Get a legendary rain in Build Battle",
-      points: 3,
+      points: 5,
     },
   ],
   [
     "h10",
     {
       name: "Get a stack and a half of ems in 1 bw game",
-      points: 3,
+      points: 5,
     },
   ],
 ]);
