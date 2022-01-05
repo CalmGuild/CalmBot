@@ -17,7 +17,7 @@ const command: ICommandSettings = {
   run: async (client, message, args, settings) => {
     const user = await Utils.getUser(message.author.id);
     if (!user.minecraftUUID) {
-      message.reply(`You must link your hypixel account to discord before applying! Please use the ${client.prefix}link command!`);
+      message.reply(`You must link your hypixel account to discord before applying! Please use the ${client.prefix}link (ign) command!`);
       return;
     }
 
