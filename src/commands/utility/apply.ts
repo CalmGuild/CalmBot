@@ -1,4 +1,5 @@
 import { CategoryChannel, MessageButton, MessageEmbed, OverwriteResolvable, PermissionString } from "discord.js";
+import { getGuild } from "../../api/hypixel";
 import { ICommandSettings } from "../../structures/interfaces";
 import constants, { Roles } from "../../util/constants";
 import Utils from "../../util/Utils";
@@ -21,7 +22,11 @@ const command: ICommandSettings = {
       return;
     }
 
-    if (user.inGuild || settings!.waitlist.find((w) => w.user === message.author.id)) {
+    let inGuild = false;
+    const guild = await getGuild(constants.CALM_GUILD_ID).catch(console.error)
+    if (guild) inGuild = guild.members.find((m) => m.uuid === user.minecraftUUID) !== undefined;
+
+    if (inGuild || settings!.waitlist.find((w) => w.user === message.author.id)) {
       message.reply(`You are already in the guild or on the waitlist!`);
       return;
     }
