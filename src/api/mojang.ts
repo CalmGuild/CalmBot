@@ -1,5 +1,10 @@
 import axios from "axios";
 
+interface NameHistoryEntry {
+  name: string;
+  changedToAt?: number;
+}
+
 export default function getUUIDFromName(name: string): Promise<string | null> {
   return new Promise((resolve, reject) => {
     axios
@@ -13,7 +18,7 @@ export default function getUUIDFromName(name: string): Promise<string | null> {
   });
 }
 
-export function getNameHistoryFromUUID(uuid: string): Promise<{ name: string; changedToAt?: number }[]> {
+export function getNameHistoryFromUUID(uuid: string): Promise<NameHistoryEntry[]> {
   return new Promise((resolve, reject) => {
     axios
       .get(`https://api.mojang.com/user/profiles/${uuid}/names`)
