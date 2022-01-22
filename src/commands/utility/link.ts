@@ -40,7 +40,7 @@ const command: ICommandSettings = {
     user.minecraftUUID = player.uuid;
     await user.save();
 
-    message.reply(`Success! Linked to ${player.uuid}`);
+    message.reply(`Success! Linked to ${args[0]}`);
   },
   description: "Link your hypixel and discord account!",
   usage: "link <mc-username>",
