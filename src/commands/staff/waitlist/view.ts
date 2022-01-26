@@ -15,7 +15,7 @@ const command: ICommandSettings = {
     await Promise.all(promises); // don't need to loop through resolved promises because once it is requested it will be cached
 
     settings!.waitlist.forEach(async (user, i) => {
-      const name = client.minecraftNames.getName(user.uuid); // all names cached from before
+      const name = await client.minecraftNames.getName(user.uuid); // all names cached from before
       waitlist += `${i + 1}. ${name}${user.isFrozen ? " | **Frozen**" : user.informed ? " | **Informed**" : ""}`;
 
       if (i === settings!.waitlist.length - 1) {
