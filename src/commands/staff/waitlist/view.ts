@@ -7,8 +7,15 @@ const command: ICommandSettings = {
       return;
     }
     let waitlist = "**Current Waitlist**\n*This is the order in who gets to join first*\n\n";
+
+    let promises = [];
+    for (const user of settings!.waitlist) {
+      promises.push(client.minecraftNames.getName(user.uuid));
+    }
+    await Promise.all(promises); // don't need to loop through resolved promises because once it is requested it will be cached
+
     settings!.waitlist.forEach(async (user, i) => {
-      const name = await client.minecraftNames.getName(user.uuid);
+      const name = client.minecraftNames.getName(user.uuid); // all names cached from before
       waitlist += `${i + 1}. ${name}${user.isFrozen ? " | **Frozen**" : user.informed ? " | **Informed**" : ""}`;
 
       if (i === settings!.waitlist.length - 1) {
