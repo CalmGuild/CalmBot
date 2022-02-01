@@ -13,32 +13,32 @@ const command: ICommandSettings = {
     } else discordUser = await client.users.fetch(args[0]!).catch(() => {});
 
     if (!discordUser) {
-      message.channel.send("Invalid discord user.\nUsage: <discordid | @discorduser> <minecraft-name>");
+      message.reply("Invalid discord user.\nUsage: <discordid | @discorduser> <minecraft-name>");
       return;
     }
 
     const user = await Utils.getUser(discordUser.id);
     if (user.minecraftUUID) {
-      message.channel.send(`User already linked to ${user.minecraftUUID}`)
+      message.reply(`User already linked to ${user.minecraftUUID}`)
       return;
     }
 
     const player = await getPlayer(args[1]!);
     if (!player) {
-      message.channel.send(`Invalid player name ${args[1]!}`)
+      message.reply(`Invalid player name ${args[1]!}`)
       return;
     }
 
     const alreadyExistingUser = await User.findOne({minecraftUUID: player.uuid})
     
     if (alreadyExistingUser !== null) {
-      message.channel.send(`This player is already linked to ${alreadyExistingUser.discordId}!`)
+      message.reply(`This player is already linked to ${alreadyExistingUser.discordId}!`)
       return;
     }
 
     user.minecraftUUID = player.uuid;
     await user.save()
-    message.channel.send(`Success! Linked ${discordUser.tag} to ${player.playername}`);
+    message.reply(`Success! Linked ${discordUser.tag} to ${player.playername}`);
 
   },
   description: "forcelink a user to their minecraft account!",
