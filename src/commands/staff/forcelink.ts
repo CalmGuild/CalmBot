@@ -13,36 +13,36 @@ const command: ICommandSettings = {
     } else discordUser = await client.users.fetch(args[0]!).catch(() => {});
 
     if (!discordUser) {
-      message.reply("Invalid discord user.\nUsage: <discordid | @discorduser> <minecraft-name>");
+      message.channel.send("Invalid discord user.\nUsage: <discordid | @discorduser> <minecraft-name>");
       return;
     }
 
     const user = await Utils.getUser(discordUser.id);
     if (user.minecraftUUID) {
-      message.reply(`User already linked to ${user.minecraftUUID}`)
+      message.channel.send(`User already linked to ${user.minecraftUUID}`)
       return;
     }
 
     const player = await getPlayer(args[1]!);
     if (!player) {
-      message.reply(`Invalid player name ${args[1]!}`)
+      message.channel.send(`Invalid player name ${args[1]!}`)
       return;
     }
 
     const alreadyExistingUser = await User.findOne({minecraftUUID: player.uuid})
     
     if (alreadyExistingUser !== null) {
-      message.reply(`This player is already linked to ${alreadyExistingUser.discordId}!`)
+      message.channel.send(`This player is already linked to ${alreadyExistingUser.discordId}!`)
       return;
     }
 
     user.minecraftUUID = player.uuid;
     await user.save()
-    message.reply(`Success! Linked ${discordUser.tag} to ${player.playername}`);
+    message.channel.send(`Success! Linked ${discordUser.tag} to ${player.playername}`);
 
   },
-  description: "Unlink a user from their minecraft account!",
-  usage: "unlink <discordid | @discorduser> <minecraft-name>",
+  description: "forcelink a user to their minecraft account!",
+  usage: "forcelink <discordid | @discorduser> <minecraft-name>",
   minArgs: 2,
   guildOnly: true,
   permissions: ["STAFF"],
