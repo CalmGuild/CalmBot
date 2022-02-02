@@ -41,8 +41,8 @@ const command: ICommandSettings = {
     message.reply(`Success! Linked ${discordUser.tag} to ${player.playername}`);
 
   },
-  description: "Unlink a user from their minecraft account!",
-  usage: "unlink <discordid | @discorduser> <minecraft-name>",
+  description: "forcelink a user to their minecraft account!",
+  usage: "forcelink <discordid | @discorduser> <minecraft-name>",
   minArgs: 2,
   guildOnly: true,
   permissions: ["STAFF"],
