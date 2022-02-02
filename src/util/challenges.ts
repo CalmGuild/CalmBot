@@ -6,214 +6,49 @@ interface Challenge {
 }
 
 export default new Collection<string, Challenge>([
-  [
-    "e1",
-    {
-      name: "Win a game of corrupted Skywars",
-      points: 1,
-    },
-  ],
-  [
-    "e2",
-    {
-      name: "Place top 5 on a drag in SB",
-      points: 1,
-    },
-  ],
-  [
-    "e3",
-    {
-      name: "Win a solo q of 4s bw",
-      points: 1,
-    },
-  ],
-  [
-    "e4",
-    {
-      name: "Win a game of Warlords",
-      points: 1,
-    },
-  ],
-  [
-    "e5",
-    {
-      name: "Get first in Build Battle",
-      points: 1,
-    },
-  ],
-  [
-    "e6",
-    {
-      name: "Defuse a bomb in cvc",
-      points: 1,
-    },
-  ],
-  [
-    "e7",
-    {
-      name: "Get gtop top 10 in your guild",
-      points: 1,
-    },
-  ],
-  [
-    "e8",
-    {
-      name: "Get silver in any sb farming contest",
-      points: 1,
-    },
-  ],
-  [
-    "e9",
-    {
-      name: "Beat hopez in a duel",
-      points: 1,
-    },
-  ],
-  [
-    "e10",
-    {
-      name: "Add a friend on hypizel",
-      points: 1,
-    },
-  ],
-  [
-    "m1",
-    {
-      name: "Get 6 kills and win in solo SW",
-      points: 3,
-    },
-  ],
-  [
-    "m2",
-    {
-      name: "Get 1k points in TDM cvc",
-      points: 3,
-    },
-  ],
-  [
-    "m3",
-    {
-      name: "Teamwipe a team in 4s bw",
-      points: 3,
-    },
-  ],
-  [
-    "m4",
-    {
-      name: "Win creeper attack",
-      points: 3,
-    },
-  ],
-  [
-    "m5",
-    {
-      name: "Take a screenie with a YT or Admin",
-      points: 3,
-    },
-  ],
-  [
-    "m6",
-    {
-      name: "Win a solo quakecraft game",
-      points: 3,
-    },
-  ],
-  [
-    "m7",
-    {
-      name: "Win a game of party games with 24 stars",
-      points: 3,
-    },
-  ],
-  [
-    "m8",
-    {
-      name: "Get a 50 ws in any duel mode",
-      points: 3,
-    },
-  ],
-  [
-    "m9",
-    {
-      name: "Kill the same player 5 times in a row (solo bw)",
-      points: 3,
-    },
-  ],
-  [
-    "m10",
-    {
-      name: "5-0 your opponent in solo bridge",
-      points: 3,
-    },
-  ],
-  [
-    "h1",
-    {
-      name: "Place top heal/dmg in Warlords",
-      points: 5,
-    },
-  ],
-  [
-    "h2",
-    {
-      name: "Win solo sw with every challenge",
-      points: 5,
-    },
-  ],
-  [
-    "h3",
-    {
-      name: "Win a game of UHC",
-      points: 5,
-    },
-  ],
-  [
-    "h4",
-    {
-      name: "Get a 8 or 9 kill solo sw win",
-      points: 5,
-    },
-  ],
-  [
-    "h5",
-    {
-      name: "Get a 50 ws in bedwars",
-      points: 5,
-    },
-  ],
-  [
-    "h6",
-    {
-      name: "Kill every survivor in vampirez",
-      points: 5,
-    },
-  ],
-  [
-    "h7",
-    {
-      name: "Get 250k+ gexp in 1 day",
-      points: 5,
-    },
-  ],
-  [
-    "h8",
-    {
-      name: "Add hopez on Hypixel",
-      points: 5,
-    },
-  ],
-  [
-    "h9",
-    {
-      name: "Get a legendary rain in Build Battle",
-      points: 5,
-    },
-  ],
-  [
-    "h10",
-    {
-      name: "Get a stack and a half of ems in 1 bw game",
-      points: 5,
-    },
-  ],
+  ["e1", { name: "Win a game of Capture the Wool", points: 1 }],
+  ["e2", { name: "Win a game of Cops vs Crims", points: 1 }],
+  ["e3", { name: "Win a game of Pixel Party", points: 1 }],
+  ["e4", { name: "Win a game of Warlords", points: 1 }],
+  ["e5", { name: "Win a game of Ender Spleef", points: 1 }],
+  ["e6", { name: "Win a game of Paintball", points: 1 }],
+  ["e7", { name: "Win a game of Mega Walls without being finaled", points: 1 }],
+  ["e8", { name: "Win a game of Football", points: 1 }],
+  ["e9", { name: "Win a game of Wizards", points: 1 }],
+  ["e10", { name: "Win a game of Invaders", points: 1 }],
+  ["e11", { name: "Get 5 kills in Warlords TDM", points: 1 }],
+  ["e12", { name: "Max diamond upgrades in Bedwars", points: 1 }],
+  ["e13", { name: "Win a game of Farm Hunt", points: 1 }],
+  ["e14", { name: "Win TNT Run with 5+ double jumps left", points: 1 }],
+  ["e15", { name: "Win solo Skywars using Sloth kit", points: 1 }],
+  ["m1", { name: "Win a game of Speed UHC", points: 3 }],
+  ["m2", { name: "Win a game of Ender Spleef with 2k+ blocks broken", points: 3 }],
+  ["m3", { name: "Capture 2 wools in CTW", points: 3 }],
+  ["m4", { name: "Get 15+ kills in Galaxy Wars", points: 3 }],
+  ["m5", { name: "Kill all 3 withers in Mini Walls and then win", points: 3 }],
+  ["m6", { name: "Win Vampirez as the last survivor", points: 3 }],
+  ["m7", { name: "Win a game of Zombies in under 30 mintues", points: 3 }],
+  ["m8", { name: "Win Bedwars with the defused challenge", points: 3 }],
+  ["m9", { name: "Win Bedwars with the swordless challenge", points: 3 }],
+  ["m10", { name: "Get a 25 ws in any duels mode", points: 3 }],
+  ["m11", { name: "Win a game of TKR", points: 3 }],
+  ["m12", { name: "Win a game of Dragon Wars", points: 3 }],
+  ["m13", { name: "Get top 3 kills in solo Quake", points: 3 }],
+  ["m14", { name: "Win a game of Murder Mystery as murderer", points: 3 }],
+  ["m15", { name: "Get a 7 kill game in solo Skywars", points: 3 }],
+  ["h1", { name: "Obtain 2 divine or heavenly heads in 1 SW Game", points: 5 }],
+  ["h2", { name: "Win a game of Blitz without opening any chests", points: 5 }],
+  ["h3", { name: "Win Blitz with the rambo kit", points: 5 }],
+  ["h4", { name: "Win a UHC game", points: 5 }],
+  ["h5", { name: "Kill a dragon in Bedwars", points: 5 }],
+  ["h6", { name: "Place top 3 in a major Pit event", points: 5 }],
+  ["h7", { name: "Claim a bounty of 1500 or more gold in the Pit", points: 5 }],
+  ["h8", { name: "Win Blitz with the florist kit", points: 5 }],
+  ["h9", { name: "Win a game of TNT Run without using any double jumps", points: 5 }],
+  ["h10", { name: "Get 15 combined kills in teams Skywars", points: 5 }],
+  ["h11", { name: "12 human kills as a vamp in Vampirez", points: 5 }],
+  ["h12", { name: "Get a 24 star game of Party Games", points: 5 }],
+  ["h13", { name: "50 ws in any duels modes (not sumo)", points: 5 }],
+  ["h14", { name: "50+ kills in team Quake", points: 5 }],
+  ["h15", { name: "Win a game of blocking dead as the last survivor", points: 5 }],
 ]);
