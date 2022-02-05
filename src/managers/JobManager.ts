@@ -3,7 +3,7 @@ import path from "path";
 
 import { Collection } from "discord.js";
 import Client from "../structures/Client";
-import Job from "../schemas/Job";
+import Job, { IJob } from "../schemas/Job";
 
 export default class JobManager {
   private client: Client;
@@ -20,12 +20,7 @@ export default class JobManager {
     Job.find().then((jobs) =>
       jobs.forEach(async (job) => {
         if (job.expirationTimestamp > Date.now()) {
-          // job has not passed yet
-          setTimeout(() => {
-            const callback = this.jobs.get(job.name);
-            if (callback) callback(job.data, this.client);
-            job.delete();
-          }, job.expirationTimestamp - Date.now());
+          this.createTimeout(job);
         } else {
           // job has passed
           const callback = this.jobs.get(job.name);
@@ -45,9 +40,22 @@ export default class JobManager {
 
     const job = new Job({ name: name, expirationTimestamp: expirationTime, data: data });
     await job.save();
-    setTimeout(() => {
-      this.jobs.get(name)!(new Map(data), this.client);
-      job.delete();
-    }, expirationTime - Date.now());
+    this.createTimeout(job);
+  }
+
+  private createTimeout(job: IJob) {
+    const callback = this.jobs.get(job.name);
+    if (!callback) return;
+
+    const diff = job.expirationTimestamp - Date.now();
+
+    if (diff > 0x7fffffff) {
+      setTimeout(() => this.createTimeout(job), 0x7fffffff);
+    } else {     
+      setTimeout(() => {       
+        callback(job.data, this.client);
+        job.delete();
+      }, diff);
+    }
   }
 }
