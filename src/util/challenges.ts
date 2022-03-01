@@ -23,7 +23,7 @@ export default new Collection<string, Challenge>([
   ["e9", { name: "Get a new year's cake from the baker in Skyblock  ", points: 1 }],
   ["e10", { name: "Win a game of paintball ", points: 1 }],
   ["m1", { name: "Win a game of bounty hunters with 70 points ", points: 3 }],
-  ["m2", { name: "", points: 3 }],
+  ["m2", { name: "Score the most points and win a game of Deathmatch in Cops vs Crims", points: 3 }],
   ["m3", { name: "Win a game of farm hunt as the last survivor ", points: 3 }],
   ["m4", { name: "Get 5 kills in pvp run ", points: 3 }],
   ["m5", { name: "Drink holy water in UHC ", points: 3 }],
