@@ -32,9 +32,11 @@ const event: IButtonInteraction = {
       .catch(() => {});
 
     const user = await User.findOne({ discordId: interaction.user.id });
+    let name = undefined;
+    if (user?.minecraftUUID) name = await client.minecraftNames.getName(user.minecraftUUID);
 
     const applicationTeam = Utils.getRole(interaction.guild!, Roles.APPLICATIONS_TEAM);
-    const embed = new MessageEmbed().setTitle("Application Submited").setDescription(`${interaction.user.tag} has submited their application and it is ready for review.\n\nMC UUID: ${user?.minecraftUUID ?? "N/A"}`);
+    const embed = new MessageEmbed().setTitle("Application Submited").setDescription(`${interaction.user.tag} has submited their application and it is ready for review.\n\nMinecraft Name: ${name ?? "N/A"}\n\n**Check Stats:**\nPlancke: https://plancke.io/hypixel/player/stats/${name}\n25karma: https://25karma.xyz/player/${name}`);
 
     const acceptButton = new MessageButton().setCustomId(`acceptApplication_${userId}`).setStyle("SUCCESS").setLabel("Accept");
     const denyButton = new MessageButton().setCustomId(`denyApplication_${userId}`).setStyle("DANGER").setLabel("Deny");
