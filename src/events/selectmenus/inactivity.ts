@@ -24,7 +24,7 @@ const event: ISelectMenuInteraction = {
     user!.inactivePending = true;
     await user!.save();
 
-    interaction.reply("Your inactivity request is now pending. You will be notified of the result by staff when it is done.").then(() => {
+    interaction.reply("Your inactivity request is now pending. You will be notified if it is denied.").then(() => {
       interaction.channel?.messages.fetch(interaction.message.id).then((message) => message.delete());
     });
 
