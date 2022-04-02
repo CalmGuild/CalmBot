@@ -51,7 +51,6 @@ const event: IButtonInteraction = {
 
         user!.inactive = false;
         user!.inactivePending = false;
-        user!.inactiveExpires = undefined;
         user!.inactiveReason = undefined;
         await user!.save();
       }

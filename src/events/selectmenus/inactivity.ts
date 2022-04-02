@@ -14,6 +14,8 @@ const event: ISelectMenuInteraction = {
 
     const user = await User.findOne({ discordId: userId });
 
+    const lastInactivityExpired = user!.inactiveExpires;
+
     let expires = Date.now();
     if (interaction.values[0] === "1w") expires += 1000 * 60 * 60 * 24 * 7;
     else if (interaction.values[0] === "2w") expires += 1000 * 60 * 60 * 24 * 7 * 2;
@@ -33,7 +35,7 @@ const event: ISelectMenuInteraction = {
       const embed = new MessageEmbed()
         .setTitle("New Inactivity Request")
         .setColor("RED")
-        .setDescription(`Inactivity Request from ${interaction.user.toString()}\n\`\`\`\n${user?.inactiveReason}\`\`\``)
+        .setDescription(`Inactivity Request from ${interaction.user.toString()}\nLast Inactive Expired: ${lastInactivityExpired ? `<t:${Math.floor(lastInactivityExpired / 1000)}:R>` : "N/A"}\n\`\`\`\n${user?.inactiveReason}\`\`\``)
         .addField("Time", interaction.values[0]!.replace("w", " week(s)"));
 
       const accept = new MessageButton().setLabel("Accept").setStyle("SUCCESS").setCustomId(`acceptInactivity_${userId}`);
