@@ -21,7 +21,7 @@ const command: ICommandSettings = {
     }
 
     settings!.waitlist = settings!.waitlist.map((w) => {
-      if (w.user === member!.id) return { uuid: w.uuid, user: w.user, isFrozen: false, informed: !waitlistMember.informed };
+      if (w.user === member!.id) return { uuid: w.uuid, user: w.user, isFrozen: false, informed: !waitlistMember.informed, isOtk: w.isOtk };
       return w;
     });
     await settings?.save();

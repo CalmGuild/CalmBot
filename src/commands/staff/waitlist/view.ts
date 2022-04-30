@@ -16,10 +16,25 @@ const command: ICommandSettings = {
 
     settings!.waitlist.forEach(async (user, i) => {
       const name = await client.minecraftNames.getName(user.uuid); // all names cached from before
-      waitlist += `${i + 1}. ${name}${user.isFrozen ? " | **Frozen**" : user.informed ? " | **Informed**" : ""}`;
+
+      const flags = [];
+      if (user.informed) flags.push("Informed");
+      if (user.isFrozen) flags.push("Frozen");
+      if (user.isOtk) flags.push("OTK");
+
+      let formattedFlags = "";
+      if (flags.length === 1 && flags[0]) {
+        formattedFlags = ` | **${flags[0]}**`
+      }
+
+      else if (flags.length > 1) {
+        formattedFlags = ` | ${flags.map((flag) => `**${flag},** `).join("").slice(0, -4)}**`
+      }
+
+      waitlist += `${i + 1}. ${name}${formattedFlags}`;
 
       if (i === settings!.waitlist.length - 1) {
-        waitlist += "\n\n**Informed**: informed of open guild slot they can join\n**Frozen**: frozen in place for any reason";
+        waitlist += "\n\n**Informed**: Informed of open guild slot they can join\n**Frozen**: Frozen in place for any reason\n**OTK**: Previous member of the guild that willing got kicked so they could join back at the top of the waitlist later";
         message.reply(waitlist);
       } else waitlist += "\n";
     });

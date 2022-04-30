@@ -28,6 +28,10 @@ export const Roles = {
   MONTHLY_CHALLENGES_TEAM: {
     name: "Monthly Challenges Team",
     id: "764901345353400350"
+  },
+  OPT_TO_KICK_ROLE: {
+    name: "OTK",
+    id: "765995836660252724"
   }
 };
 
