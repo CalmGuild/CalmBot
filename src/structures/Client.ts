@@ -87,6 +87,8 @@ export default class Client extends DiscordClient {
             guildOnly: settings.guildOnly,
             subcommands: subcommands,
             category: category,
+            permissions: settings.permissions,
+            minArgs: settings.minArgs,
             type: "SUB_COMMAND",
             run: (client, message, args) => {
               client.handleCommand(command, message, args);
