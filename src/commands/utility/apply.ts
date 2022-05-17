@@ -11,6 +11,7 @@ const questions = [
   "Have you ever been punished on Hypixel before? If so, please explain when and why (if you remember)",
   "Where did you hear about Calm, and why did you choose us?",
   "Do you have any friends in the guild? (This will not affect your application in anyway)",
+  "Is someone vouching for you? If so who?",
   "Anything you wish to add?",
 ].map((question) => `**${question}:**\n\n`);
 
