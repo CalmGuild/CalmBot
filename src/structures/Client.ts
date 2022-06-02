@@ -1,4 +1,4 @@
-import { Client as DiscordClient, ClientOptions, Collection, Message, MessageOptions, MessagePayload, ReplyMessageOptions, TextBasedChannels } from "discord.js";
+import { Client as DiscordClient, ClientOptions, Collection, Message, MessageOptions, MessagePayload, ReplyMessageOptions, TextBasedChannel } from "discord.js";
 import logger from "../logger";
 
 import fs from "fs";
@@ -179,7 +179,7 @@ export default class Client extends DiscordClient {
     });
   }
 
-  send(channel: TextBasedChannels, options: string | MessagePayload | MessageOptions, onSend?: (message: Message) => void) {
+  send(channel: TextBasedChannel, options: string | MessagePayload | MessageOptions, onSend?: (message: Message) => void) {
     channel
       .send(options)
       .then((msg) => {
