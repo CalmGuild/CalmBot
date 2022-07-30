@@ -22,7 +22,7 @@ const event: IButtonInteraction = {
       .then((member) => {
         const inactiveRole = Utils.getRole(interaction.guild!, Roles.INACTIVE);
         if (inactiveRole) member.roles.add(inactiveRole);
-        interaction.reply(`Gave user inactive role. Please inform them that they have been granted gexp immunity.`);
+        interaction.reply(`${interaction.user} has accepted ${user}'s inactivity request. Please inform them that they have been granted gexp immunity.`);
 
         client.jobManager.schedule("removeinactive", user!.inactiveExpires!, [
           ["guild", interaction.guildId!],
