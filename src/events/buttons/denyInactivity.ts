@@ -36,7 +36,7 @@ const event: IButtonInteraction = {
               }
             });
             if (inactivityChannel && inactivityChannel.isText()) {
-              inactivityChannel.send(`${user}'s inactivity request denied by ${interaction.user}`)
+              inactivityChannel.send(`${interaction.user} has denied ${user}'s inactivity request.`)
             }
           })
           .catch(() => {});
