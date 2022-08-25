@@ -11,4 +11,4 @@ const command: ICommandSettings = {
   aliases: ["poo"],
   };
   
-  export default commands
+  export default command;
