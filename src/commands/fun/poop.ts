@@ -4,8 +4,8 @@ import Utils from "../../util/Utils";
 
 const command: ICommandSettings = {
   run: (client, message, args) => {
-  client.reply("💩")
-  },
+    message.reply("💩")
+    },
   description: "Get a poop reply",
   usage: "poop",
   aliases: ["poo"],
