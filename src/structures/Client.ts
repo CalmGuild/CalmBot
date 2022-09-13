@@ -1,4 +1,4 @@
-import { Client as DiscordClient, ClientOptions, Collection, Message, MessageOptions, MessagePayload, ReplyMessageOptions, TextBasedChannels } from "discord.js";
+import { Client as DiscordClient, ClientOptions, Collection, Message, MessageOptions, MessagePayload, ReplyMessageOptions, TextBasedChannel } from "discord.js";
 import logger from "../logger";
 
 import fs from "fs";
@@ -87,6 +87,8 @@ export default class Client extends DiscordClient {
             guildOnly: settings.guildOnly,
             subcommands: subcommands,
             category: category,
+            permissions: settings.permissions,
+            minArgs: settings.minArgs,
             type: "SUB_COMMAND",
             run: (client, message, args) => {
               client.handleCommand(command, message, args);
@@ -177,7 +179,7 @@ export default class Client extends DiscordClient {
     });
   }
 
-  send(channel: TextBasedChannels, options: string | MessagePayload | MessageOptions, onSend?: (message: Message) => void) {
+  send(channel: TextBasedChannel, options: string | MessagePayload | MessageOptions, onSend?: (message: Message) => void) {
     channel
       .send(options)
       .then((msg) => {

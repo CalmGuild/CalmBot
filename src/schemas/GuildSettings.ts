@@ -6,6 +6,7 @@ interface WaitlistUser {
   uuid: string;
   isFrozen: boolean;
   informed: boolean;
+  isOtk: boolean;
 }
 
 interface Application {

@@ -17,7 +17,6 @@ export default function (data: Map<string, string>, client: Client) {
       const user = await User.findOne({ discordId: userId });
       user!.inactive = false;
       user!.inactivePending = false;
-      user!.inactiveExpires = undefined;
       user!.inactiveReason = undefined;
 
       await user?.save();

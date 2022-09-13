@@ -17,7 +17,7 @@ const command: ICommandSettings = {
           message.reply("You are not in calm guild!");
           return;
         }
-
+        
         if (user.inactivePending || user.inactive) {
           message.reply(`You already ${user.inactive ? "are inactive" : "have an inactivity request pending"}!`);
           return;
@@ -37,6 +37,7 @@ const command: ICommandSettings = {
             { label: "Two weeks", value: "2w", emoji: "2️⃣" },
             { label: "Three weeks", value: "3w", emoji: "3️⃣" },
             { label: "Four weeks", value: "4w", emoji: "4️⃣" },
+            { label: "OTK", value: "otk", emoji: "🟥" },
           ]);
         message.reply({ embeds: [embed], components: [{ type: "ACTION_ROW", components: [selectMenu] }] });
       })
@@ -49,7 +50,7 @@ const command: ICommandSettings = {
   description: "Marks you as inactive and exempts you from gexp requirements!",
   usage: "inactive (reason)",
   guildOnly: true,
-  aliases: ["inactivity"],
+  aliases: ["inactivity", "otk"],
   minArgs: 1,
 };
 

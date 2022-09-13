@@ -14,17 +14,23 @@ const event: ISelectMenuInteraction = {
 
     const user = await User.findOne({ discordId: userId });
 
+    const lastInactivityExpired = user!.inactiveExpires;
+    
+    let otk = false;
     let expires = Date.now();
     if (interaction.values[0] === "1w") expires += 1000 * 60 * 60 * 24 * 7;
     else if (interaction.values[0] === "2w") expires += 1000 * 60 * 60 * 24 * 7 * 2;
     else if (interaction.values[0] === "3w") expires += 1000 * 60 * 60 * 24 * 7 * 3;
-    else expires += 1000 * 60 * 60 * 24 * 7 * 4;
+    else if (interaction.values[0] === "4w") expires += 1000 * 60 * 60 * 24 * 7 * 4;
+    else otk = true;
 
+    if (!otk)
     user!.inactiveExpires = expires;
+  
     user!.inactivePending = true;
     await user!.save();
 
-    interaction.reply("Your inactivity request is now pending. You will be notified of the result by staff when it is done.").then(() => {
+    interaction.reply("Your inactivity request is now pending. You will be notified if it is denied.").then(() => {
       interaction.channel?.messages.fetch(interaction.message.id).then((message) => message.delete());
     });
 
@@ -33,10 +39,10 @@ const event: ISelectMenuInteraction = {
       const embed = new MessageEmbed()
         .setTitle("New Inactivity Request")
         .setColor("RED")
-        .setDescription(`Inactivity Request from ${interaction.user.toString()}\n\`\`\`\n${user?.inactiveReason}\`\`\``)
-        .addField("Time", interaction.values[0]!.replace("w", " week(s)"));
+        .setDescription(`Inactivity Request from ${interaction.user.toString()}\nLast Inactive Expired: ${lastInactivityExpired ? `<t:${Math.floor(lastInactivityExpired / 1000)}:R>` : "N/A"}\n\`\`\`\n${user?.inactiveReason}\`\`\``)
+        .addField("Time", otk ? "OTK" : interaction.values[0]!.replace("w", " week(s)"));
 
-      const accept = new MessageButton().setLabel("Accept").setStyle("SUCCESS").setCustomId(`acceptInactivity_${userId}`);
+      const accept = new MessageButton().setLabel("Accept").setStyle("SUCCESS").setCustomId(`accept${otk ? "OTK" : "Inactivity"}_${userId}`);
       const deny = new MessageButton().setLabel("Deny").setStyle("DANGER").setCustomId(`denyInactivity_${userId}`);
 
       inactivityChannel.send({ embeds: [embed], components: [{ type: "ACTION_ROW", components: [accept, deny] }] });

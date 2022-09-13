@@ -10,31 +10,32 @@ const event: IButtonInteraction = {
 
     const userId = interaction.customId.split("_")[1]!;
     const user = await User.findOne({ discordId: userId });
-    user!.inactive = true;
+    
+    if (!user) {
+      interaction.reply("Error fetching user, please report this to a developer");
+      return;
+    }
+
+    user.inactivePending = false;
+    await user.save();
 
     interaction.message.edit({
       components: Utils.disableButtons(interaction.message.components, { disableAll: true }),
     });
 
-    await user!.save();
     interaction
       .guild!.members.fetch(userId)
       .then((member) => {
-        const inactiveRole = Utils.getRole(interaction.guild!, Roles.INACTIVE);
-        if (inactiveRole) member.roles.add(inactiveRole);
-        interaction.reply(`${interaction.user} has accepted ${member.user}'s inactivity request. Please inform them that they have been granted gexp immunity.`);
-
-        client.jobManager.schedule("removeinactive", user!.inactiveExpires!, [
-          ["guild", interaction.guildId!],
-          ["user", userId],
-        ]);
+        const otkRole = Utils.getRole(interaction.guild!, Roles.OPT_TO_KICK_ROLE);
+        if (otkRole) member.roles.add(otkRole);
+        interaction.reply(`Gave user OTK role. Please make sure to remove their guild member roles and remove them from the guild.`);
       })
       .catch((err) => {
         console.error(err);
         interaction.reply("Error fetching member. Please report this to a developer.");
       });
   },
-  validator: (button) => button.customId.toLowerCase().startsWith("acceptinactivity") && button.inGuild(),
+  validator: (button) => button.customId.toLowerCase().startsWith("acceptotk") && button.inGuild(),
 };
 
 export default event;

@@ -21,19 +21,28 @@ export default async function guildMemberUpdate(client: Client, oldMember: Guild
       return;
     }
 
-    settings.waitlist.push({ user: newMember.id, isFrozen: false, informed: false, uuid: user.minecraftUUID });
+    const optToKickRole = Utils.getRole(newMember.guild, Roles.OPT_TO_KICK_ROLE);
+    if (optToKickRole && newMember.roles.cache.has(optToKickRole.id)) {
+      let index = 0;
+      for (let i = 0; i < settings.waitlist.length; i++) {
+        if (settings.waitlist[i]?.isOtk) index = i;
+      }
+
+      settings.waitlist.splice(index, 0, { user: newMember.id, isFrozen: false, informed: false, uuid: user.minecraftUUID, isOtk: true });
+    } else settings.waitlist.push({ user: newMember.id, isFrozen: false, informed: false, uuid: user.minecraftUUID, isOtk: false });
 
     const channel = newMember.guild.channels.cache.get(settings.waitlistChannel!);
     if (!channel || !channel.isText()) settings.waitlistChannel = undefined;
 
     newMember.send({ embeds: [new MessageEmbed().setDescription(`Congratulations you have been accepted and are now on the calm waitlist!${channel ? `\n${channel}` : ""}`)] }).catch(() => {});
-    await settings.save();
 
     if (channel && channel.isText()) {
       channel.send(
         `${newMember}\nCongratulations, you’ve made it to our waitlist\nWhile waiting:\n  • Read the pinned message in this channel\n  • Read our rules\n  • Come talk to us in general! <3\n\nIf you have any questions please open a ticket and we would be happy to help\nOnce a spot opens up for you, you will be pinged here!`
       );
     }
+
+    await settings.save();
   } else if (oldRoles.size > 0 && oldRoles.first()!.id === waitlistRole.id) {
     const waitlistMember = settings.waitlist.find((w) => w.user === newMember.id);
     if (!waitlistMember) return;

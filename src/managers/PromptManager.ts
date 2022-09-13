@@ -1,13 +1,13 @@
-import { TextBasedChannels, User, Collection, Message, MessageSelectMenu, MessageButton, SelectMenuInteraction } from "discord.js";
+import { TextBasedChannel, User, Collection, Message, MessageSelectMenu, MessageButton, SelectMenuInteraction } from "discord.js";
 import Client from "../structures/Client";
 import { PromptCallback, PromptQuestion } from "../structures/interfaces";
 
 export default class PromptManager {
-  static prompts: { instance: PromptManager; user: User; channel: TextBasedChannels }[] = [];
+  static prompts: { instance: PromptManager; user: User; channel: TextBasedChannel }[] = [];
 
   private client: Client;
   private user: User;
-  private channel: TextBasedChannels;
+  private channel: TextBasedChannel;
   private questions: PromptQuestion[];
   private callback: PromptCallback;
 
@@ -15,7 +15,7 @@ export default class PromptManager {
   private currentIndex = -1;
   private answers = new Collection<string, Message>();
 
-  constructor(client: Client, user: User, channel: TextBasedChannels, questions: PromptQuestion[], whenFinished: PromptCallback) {
+  constructor(client: Client, user: User, channel: TextBasedChannel, questions: PromptQuestion[], whenFinished: PromptCallback) {
     this.client = client;
     this.user = user;
     this.channel = channel;
