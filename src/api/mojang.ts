@@ -1,10 +1,5 @@
 import axios from "axios";
 
-interface NameHistoryEntry {
-  name: string;
-  changedToAt?: number;
-}
-
 export default function getUUIDFromName(name: string): Promise<string | null> {
   return new Promise((resolve, reject) => {
     axios
@@ -18,17 +13,18 @@ export default function getUUIDFromName(name: string): Promise<string | null> {
   });
 }
 
-export function getNameHistoryFromUUID(uuid: string): Promise<NameHistoryEntry[]> {
+interface MojangProfile {
+  id: string;
+  name: string;
+}
+
+export const getProfileFromUUID = (uuid: string): Promise<MojangProfile | null> => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`https://api.mojang.com/user/profiles/${uuid}/names`)
+      .get(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`)
       .then((res) => {
-        if (res.data === "") reject(null);
-        resolve(res.data);
+        resolve(res.data ?? null);
       })
-      .catch((err) => {
-        console.error(err);
-        reject(err);
-      });
+      .catch(reject);
   });
-}
+};
