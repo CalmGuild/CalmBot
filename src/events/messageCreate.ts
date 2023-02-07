@@ -2,6 +2,7 @@ import { Message } from "discord.js";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import Client from "../structures/Client";
 import PromptManager from "../managers/PromptManager";
+import handleBridgeMessage from "../util/handleBridgeMessage";
 
 export default async function messageCreate(client: Client, message: Message) {
   if (message.author.bot) return;
@@ -12,8 +13,6 @@ export default async function messageCreate(client: Client, message: Message) {
     return;
   }
 
-  if (!message.content.toLowerCase().startsWith(client.prefix)) return;
-
   let settings: IGuildSettings | null = null;
   if (message.guild) {
     settings = await GuildSettings.findOne({guildID: message.guild.id})
@@ -21,7 +20,14 @@ export default async function messageCreate(client: Client, message: Message) {
       settings = new GuildSettings({guildID: message.guild.id});
       await settings.save();
     }
+
+    if (settings.bridgeChannel === message.channelId && message.content.length > 0) {
+      handleBridgeMessage(client, message);
+      return;
+    }
   }
+
+  if (!message.content.toLowerCase().startsWith(client.prefix)) return;
 
   const args: string[] = message.content.slice(client.prefix.length).trim().split(/ +/g);
   const commandName = args.shift()!.toLowerCase();

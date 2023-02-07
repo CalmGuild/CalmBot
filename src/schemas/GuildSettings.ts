@@ -25,6 +25,7 @@ export interface IGuildSettings extends Document {
   waitlist: Array<WaitlistUser>;
   waitlistChannel?: string;
   applicants: Collection<string, Application>;
+  bridgeChannel?: string;
 }
 
 const GuildSettingsScema = new Schema({
@@ -38,6 +39,7 @@ const GuildSettingsScema = new Schema({
   waitlist: { type: Array<WaitlistUser>(), default: new Array<WaitlistUser>() },
   waitlistChannel: { type: String },
   applicants: { type: Map, default: new Map() },
+  bridgeChannel: { type: String }
 });
 
 export default model<IGuildSettings>("GuildSettings", GuildSettingsScema);
