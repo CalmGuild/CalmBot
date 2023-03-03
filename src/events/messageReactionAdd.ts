@@ -14,7 +14,7 @@ export default async function messageReactionAdd(client: Client, messageReaction
 
     const skullboardChannelId = guildSettings.skullboardChannel;
     const skullboard = skullboardChannelId ? messageReaction.message.guild.channels.cache.get(skullboardChannelId) : undefined;
-    if (!skullboard || !(skullboard instanceof TextChannel)) return;
+    if (!skullboard || !(skullboard instanceof TextChannel) || messageReaction.message.channelId === skullboard.id) return;
 
     let skulledMessage: ISkullMessage | null = await SkullMessage.findOne({ origianlMessageId: messageReaction.message.id });
     if (skulledMessage === null) {
