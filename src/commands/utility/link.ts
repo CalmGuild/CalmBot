@@ -32,7 +32,8 @@ const command: ICommandSettings = {
       return;
     }
 
-    if (player.socialMedia.links.DISCORD !== message.author.tag) {
+    // +"#0" added to maintain fuctionality for users who have migrated to the new discord naming system     
+    if (player.socialMedia.links.DISCORD !== message.author.tag && player.socialMedia.links.DISCORD + "#0" != message.author.tag) {
       message.reply(`This account is linked to: ${Util.escapeMarkdown(player.socialMedia.links.DISCORD)}\nPlease relink your account to match your current name and tag (case sensitive)`);
       return;
     }
