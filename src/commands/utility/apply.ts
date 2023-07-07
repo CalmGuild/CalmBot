@@ -5,13 +5,10 @@ import constants, { Roles } from "../../util/constants";
 import Utils from "../../util/Utils";
 
 const questions = [
-  "Age/age range (must be 13 or older)",
   "Gamemode you are applying with?",
-  "What was your past guild and your reason for leaving/getting kicked?",
   "Have you ever been punished on Hypixel before? If so, please explain when and why (if you remember)",
-  "Where did you hear about Calm, and why did you choose us?",
-  "Do you have any friends in the guild? (This will not affect your application in anyway)",
   "Is someone vouching for you? If so who?",
+  "Are you planning on being active in the discord?",
   "Anything you wish to add?",
 ].map((question) => `**${question}:**\n\n`);
 
