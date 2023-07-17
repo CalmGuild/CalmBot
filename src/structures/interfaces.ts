@@ -1,6 +1,7 @@
 import { ButtonInteraction, Collection, ContextMenuInteraction, Message, PermissionString, SelectMenuInteraction } from "discord.js";
 import { IGuildSettings } from "../schemas/GuildSettings";
 import Client from "./Client";
+import { ContextMenuCommandBuilder } from "@discordjs/builders";
 
 // Commands
 export type Permission = "DEVELOPER" | "ADMIN" | "STAFF" | PermissionString;
@@ -38,7 +39,7 @@ export interface ISelectMenuInteraction {
 
 export interface IContextMenuInteraction {
   run: (client: Client, interaction: ContextMenuInteraction) => void;
-  validator: (interaction: ContextMenuInteraction) => boolean;
+  data: ContextMenuCommandBuilder;
 }
 // Prompts
 export type PromptCallback = (answers: Collection<string, Message>) => void;

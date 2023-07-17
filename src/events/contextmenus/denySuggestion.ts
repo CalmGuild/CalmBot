@@ -1,7 +1,7 @@
 import { GuildMember, Message } from "discord.js";
 import { IContextMenuInteraction } from "../../structures/interfaces";
 import PermissionHandler from "../../util/PermissionHandler";
-import { validateSuggestion, editSuggestion } from "../../util/suggestion";
+import { editSuggestion, validateSuggestion } from "../../util/suggestion";
 import { ContextMenuCommandBuilder } from "@discordjs/builders";
 import { ApplicationCommandType } from "discord-api-types/v10";
 
@@ -22,9 +22,9 @@ const event: IContextMenuInteraction = {
       return;
     }
 
-    editSuggestion(message, "ACCEPT").then(() => interaction.reply({ content: `Suggestion accepted`, ephemeral: true }))
+    editSuggestion(message, "DENY").then(() => interaction.reply({ content: `Suggestion denied`, ephemeral: true }));
   },
-  data: new ContextMenuCommandBuilder().setName("Accept Suggestion").setType(ApplicationCommandType.Message),
+  data: new ContextMenuCommandBuilder().setName("Deny Suggestion").setType(ApplicationCommandType.Message),
 };
 
 export default event;
