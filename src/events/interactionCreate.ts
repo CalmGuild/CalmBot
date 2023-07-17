@@ -25,5 +25,8 @@ export default async function interactionCreate(client: Client, interaction: Int
   } else if (interaction.isSelectMenu()) {
     const event = Utils.findAll(client.selectMenuInteractions!, (e) => e.validator(interaction));
     if (event) event.forEach((e) => e.run(client, interaction));
+  } else if (interaction.isContextMenu()) {
+    const event = Utils.findAll(client.contextMenuInteraction!, (e) => e.validator(interaction));
+    if (event) event.forEach((e) => e.run(client, interaction));
   }
 }

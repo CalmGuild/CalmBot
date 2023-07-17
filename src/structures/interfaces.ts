@@ -1,4 +1,4 @@
-import { ButtonInteraction, Collection, Message, PermissionString, SelectMenuInteraction } from "discord.js";
+import { ButtonInteraction, Collection, ContextMenuInteraction, Message, PermissionString, SelectMenuInteraction } from "discord.js";
 import { IGuildSettings } from "../schemas/GuildSettings";
 import Client from "./Client";
 
@@ -34,6 +34,11 @@ export interface IButtonInteraction {
 export interface ISelectMenuInteraction {
   run: (client: Client, interaction: SelectMenuInteraction) => void;
   validator: (interaction: SelectMenuInteraction) => boolean;
+}
+
+export interface IContextMenuInteraction {
+  run: (client: Client, interaction: ContextMenuInteraction) => void;
+  validator: (interaction: ContextMenuInteraction) => boolean;
 }
 // Prompts
 export type PromptCallback = (answers: Collection<string, Message>) => void;
