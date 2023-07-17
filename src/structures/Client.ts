@@ -3,7 +3,7 @@ import logger from "../logger";
 
 import fs from "fs";
 import path from "path";
-import { IButtonInteraction, ICommand, ICommandSettings, ISelectMenuInteraction, SubCommandSettings } from "./interfaces";
+import { IButtonInteraction, ICommand, ICommandSettings, IContextMenuInteraction, ISelectMenuInteraction, SubCommandSettings } from "./interfaces";
 import Utils from "../util/Utils";
 import GuildSettings, { IGuildSettings } from "../schemas/GuildSettings";
 import PermissionHandler from "../util/PermissionHandler";
@@ -18,6 +18,7 @@ export default class Client extends DiscordClient {
   timeInitialized: number;
   buttonInteractions: Collection<string, IButtonInteraction> | undefined;
   selectMenuInteractions: Collection<string, ISelectMenuInteraction> | undefined;
+  contextMenuInteraction: Collection<string, IContextMenuInteraction> | undefined;
   webhook: PrivateWebhookManager | undefined;
   jobManager: JobManager;
   minecraftNames: MinecraftNameManager;
@@ -176,6 +177,7 @@ export default class Client extends DiscordClient {
         this.on(eventName, event.bind(null, this));
       } else if (file === "buttons") this.buttonInteractions = this.registerInteractions(path.join(eventsDir, file)) as Collection<string, IButtonInteraction>;
       else if (file === "selectmenus") this.selectMenuInteractions = this.registerInteractions(path.join(eventsDir, file)) as Collection<string, ISelectMenuInteraction>;
+      else if (file === "contextmenus") this.contextMenuInteraction = this.registerInteractions(path.join(eventsDir, file)) as Collection<string, IContextMenuInteraction>;
     });
   }
 
@@ -208,13 +210,13 @@ export default class Client extends DiscordClient {
     });
   }
 
-  private registerInteractions(dir: string): Collection<string, IButtonInteraction | ISelectMenuInteraction> {
-    let interactions = new Collection<string, IButtonInteraction | ISelectMenuInteraction>();
+  private registerInteractions(dir: string): Collection<string, IButtonInteraction | ISelectMenuInteraction | IContextMenuInteraction> {
+    let interactions = new Collection<string, IButtonInteraction | ISelectMenuInteraction | IContextMenuInteraction>();
     fs.readdirSync(dir)
       .filter((file) => !fs.statSync(path.join(dir, file)).isDirectory())
       .forEach((file) => {
         const name = file.split(".")[0]!;
-        const event: IButtonInteraction | ISelectMenuInteraction = require(path.join(dir, file)).default;
+        const event: IButtonInteraction | ISelectMenuInteraction | IContextMenuInteraction = require(path.join(dir, file)).default;
 
         interactions.set(name, event);
       });
