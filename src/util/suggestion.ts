@@ -5,7 +5,13 @@ export const editSuggestion = async (message: Message, action: "ACCEPT" | "DENY"
     const accept = action === "ACCEPT";
 
     const newEmbed = new MessageEmbed(message.embeds[0]).setColor(accept ? "GREEN" : "RED").setTitle(`Suggestion: ${accept ? "accepted" : "denied"}`);
-    message.edit({ embeds: [newEmbed] }).then(() => resolve(true)).catch(reject);
+    message
+      .edit({ embeds: [newEmbed] })
+      .then(async (msg) => {
+        await msg.reactions.removeAll();
+        resolve(true);
+      })
+      .catch(reject);
   });
 };
 
