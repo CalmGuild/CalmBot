@@ -22,7 +22,7 @@ const event: IContextMenuInteraction = {
       return;
     }
 
-    editSuggestion(message, "ACCEPT").then(() => interaction.reply({ content: `Suggestion accepted`, ephemeral: true }))
+    editSuggestion(message, interaction.member, "ACCEPT").then(() => interaction.reply({ content: `Suggestion accepted`, ephemeral: true }))
   },
   data: new ContextMenuCommandBuilder().setName("Accept Suggestion").setType(ApplicationCommandType.Message),
 };

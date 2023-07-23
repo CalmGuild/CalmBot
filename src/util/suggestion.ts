@@ -1,10 +1,19 @@
-import { Message, Client, MessageEmbed } from "discord.js";
+import { Message, Client, MessageEmbed, GuildMember } from "discord.js";
 
-export const editSuggestion = async (message: Message, action: "ACCEPT" | "DENY"): Promise<boolean> => {
-  return new Promise((resolve, reject) => {
+export const editSuggestion = async (message: Message, editor: GuildMember, action: "ACCEPT" | "DENY"): Promise<boolean> => {
+  return new Promise(async (resolve, reject) => {
     const accept = action === "ACCEPT";
 
-    const newEmbed = new MessageEmbed(message.embeds[0]).setColor(accept ? "GREEN" : "RED").setTitle(`Suggestion: ${accept ? "accepted" : "denied"}`);
+    const upvotes = await message.reactions.resolve("✅")?.fetch();
+    const dwonvotes = await message.reactions.resolve("❎")?.fetch();
+
+    const newEmbed = new MessageEmbed(message.embeds[0]).setColor(accept ? "GREEN" : "RED").setTitle(`Suggestion: ${accept ? "Accepted" : "Denied"}`);
+    newEmbed.addFields([
+      { name: `${accept ? "Accepted" : "Denied"} by:`, value: editor.user.toString(), inline: true },
+      { name: "Upvotes:", value: upvotes?.count.toString() ?? "0", inline: true },
+      { name: "Downvotes:", value: dwonvotes?.count.toString() ?? "0", inline: true },
+    ]);
+
     message
       .edit({ embeds: [newEmbed] })
       .then(async (msg) => {

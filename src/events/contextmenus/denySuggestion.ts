@@ -22,7 +22,7 @@ const event: IContextMenuInteraction = {
       return;
     }
 
-    editSuggestion(message, "DENY").then(() => interaction.reply({ content: `Suggestion denied`, ephemeral: true }));
+    editSuggestion(message, interaction.member, "DENY").then(() => interaction.reply({ content: `Suggestion denied`, ephemeral: true }));
   },
   data: new ContextMenuCommandBuilder().setName("Deny Suggestion").setType(ApplicationCommandType.Message),
 };
