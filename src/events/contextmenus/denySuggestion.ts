@@ -6,7 +6,7 @@ import { ContextMenuCommandBuilder } from "@discordjs/builders";
 import { ApplicationCommandType } from "discord-api-types/v10";
 
 const event: IContextMenuInteraction = {
-  run: (client, interaction) => {
+  run: async (client, interaction) => {
     if (!interaction.isMessageContextMenu() || !interaction.inGuild() || !(interaction.member instanceof GuildMember)) return;
 
     if (!PermissionHandler.isAdmin(interaction.member)) {
@@ -22,7 +22,8 @@ const event: IContextMenuInteraction = {
       return;
     }
 
-    editSuggestion(message, interaction.member, "DENY").then(() => interaction.reply({ content: `Suggestion denied`, ephemeral: true }));
+    await interaction.deferReply();
+    editSuggestion(message, interaction.member, "DENY").then(() => interaction.editReply({ content: `Suggestion denied` }));
   },
   data: new ContextMenuCommandBuilder().setName("Deny Suggestion").setType(ApplicationCommandType.Message),
 };
