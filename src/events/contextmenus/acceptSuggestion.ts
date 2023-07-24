@@ -22,8 +22,8 @@ const event: IContextMenuInteraction = {
       return;
     }
 
-    await interaction.deferReply();
-    editSuggestion(message, interaction.member, "ACCEPT").then(() => interaction.editReply({ content: `Suggestion accepted` }))
+    await interaction.deferReply({ ephemeral: true });
+    editSuggestion(message, interaction.member, "ACCEPT").then(() => interaction.editReply({ content: `Suggestion accepted` }));
   },
   data: new ContextMenuCommandBuilder().setName("Accept Suggestion").setType(ApplicationCommandType.Message),
 };
