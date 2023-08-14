@@ -60,4 +60,54 @@ export default new Collection<string, Challenge>([
   ],
   ["h9", { name: "Make a notch apple in UHC", points: 5 }],
   ["h10", { name: "Win a game of murder mystery as murderer with 15 kills", points: 5 }],
+  ["e11", { name: "Spawn a blaze in Skywars", points: 1 }],
+  ["e12", { name: "Buy a potion in Bedwars", points: 1 }],
+  [
+    "e13",
+    {
+      name: "Eat a golden apple in UHC",
+      points: 1,
+    },
+  ],
+  ["e14", { name: "Get a kill in Smash Heroes", points: 1 }],
+  ["e15", { name: "Obtain a bow as an innocent in Murder Mystery", points: 1 }],
+  ["m11", { name: "Win a game as Murderer in Murder Mystery", points: 3 }],
+  ["m12", { name: "Complete the Slow Reflexes bedwars challenge", points: 3 }],
+  ["m13", { name: "Craft Anduril/Hermes’ Boots in UHC or obtain Speed II potions", points: 3 }],
+  ["m14", { name: "Obtain cooked pork chop in Skywars", points: 3 }],
+  ["m15", { name: "Fish an enchanted book in Skywars", points: 3 }],
+  ["h11", { name: "Win a game of Skywars with 8+ kills and a challenge active", points: 5 }],
+  ["h12", { name: "Win a game of Arena Brawl in a minute or less", points: 5 }],
+  [
+    "h13",
+    {
+      name: "Win a game of Mega Walls with your wither still alive",
+      points: 5,
+    },
+  ],
+  ["h14", { name: "Complete all 5 tasks in Hide and Seek party pooper", points: 5 }],
+  ["h15", { name: "Score 4 goals in a game of Football", points: 5 }],
 ]);
+
+/*
+Spawn a blaze in Skywars
+Buy a potion in Bedwars
+Eat a golden apple in UHC
+Get a kill in Smash Heroes
+Obtain a bow as an innocent in Murder Mystery
+
+Medium:
+Win a game as Murderer in Murder Mystery
+Complete the Slow Reflexes bedwars challenge
+Craft Anduril/Hermes’ Boots in UHC or obtain Speed II potions
+Obtain cooked pork chop in Skywars
+Fish an enchanted book in Skywars
+
+Hard:
+Win a game of Skywars with 8+ kills and a challenge active
+Win a game of Arena Brawl in a minute or less
+Win a game of Mega Walls with your wither still alive
+Complete all 5 tasks in Hide and Seek party pooper
+Score 4 goals in a game of Football
+
+*/
