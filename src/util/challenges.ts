@@ -88,26 +88,3 @@ export default new Collection<string, Challenge>([
   ["h14", { name: "Complete all 5 tasks in Hide and Seek party pooper", points: 5 }],
   ["h15", { name: "Score 4 goals in a game of Football", points: 5 }],
 ]);
-
-/*
-Spawn a blaze in Skywars
-Buy a potion in Bedwars
-Eat a golden apple in UHC
-Get a kill in Smash Heroes
-Obtain a bow as an innocent in Murder Mystery
-
-Medium:
-Win a game as Murderer in Murder Mystery
-Complete the Slow Reflexes bedwars challenge
-Craft Anduril/Hermes’ Boots in UHC or obtain Speed II potions
-Obtain cooked pork chop in Skywars
-Fish an enchanted book in Skywars
-
-Hard:
-Win a game of Skywars with 8+ kills and a challenge active
-Win a game of Arena Brawl in a minute or less
-Win a game of Mega Walls with your wither still alive
-Complete all 5 tasks in Hide and Seek party pooper
-Score 4 goals in a game of Football
-
-*/
