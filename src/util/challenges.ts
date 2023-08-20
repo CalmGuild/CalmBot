@@ -87,4 +87,34 @@ export default new Collection<string, Challenge>([
   ],
   ["h14", { name: "Complete all 5 tasks in Hide and Seek party pooper", points: 5 }],
   ["h15", { name: "Score 4 goals in a game of Football", points: 5 }],
+  //
+  //
+  //
+  ["e16", { name: "Win a game of Dropper", points: 1 }],
+  ["e17", { name: "Place the most blocks in a Wool Wars game", points: 1 }],
+  [
+    "e18",
+    {
+      name: "Collect any Hypixel achievement",
+      points: 1,
+    },
+  ],
+  ["e19", { name: "Kill a survivor in VampireZ", points: 1 }],
+  ["e20", { name: "Win a Sumo Duel within 10 seconds", points: 1 }],
+  ["m16", { name: "Reach Wave 30 in Creeper Attack", points: 3 }],
+  ["m17", { name: "Win a game of Pixel Painters", points: 3 }],
+  ["m18", { name: "Capture the Flag in Warlords", points: 3 }],
+  ["m19", { name: "Win Bow Spleef without using any abilities", points: 3 }],
+  ["m20", { name: "Have a 10 Killstreak in The Pit", points: 3 }],
+  ["h16", { name: "Win Solo Survival Games with 8 Kills", points: 5 }],
+  ["h17", { name: "Reach a 50 Winstreak in Duels", points: 5 }],
+  [
+    "h18",
+    {
+      name: "Complete Zombies on the Bad Blood map",
+      points: 5,
+    },
+  ],
+  ["h19", { name: "Capture both wools at the same time in Capture the Wool", points: 5 }],
+  ["h20", { name: "Have 80 kills in a Paintball Warfare game", points: 5 }],
 ]);
