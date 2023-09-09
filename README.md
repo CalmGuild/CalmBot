@@ -1,3 +1,7 @@
+# Archival Notice
+This project has been rewritten and is now found at [this repo](https://github.com/calmguild/calmguild)
+This project will no longer be maintained 
+
 # CalmBot
 
 **Bot designed and built for serving [Calm Guild](https://discord.gg/calm)**
